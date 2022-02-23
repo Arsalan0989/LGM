@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "248895029063",
+    "project_id": "lgm-app",
+    "storage_bucket": "lgm-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:248895029063:android:27858575c9afb2e106d662",
+        "android_client_info": {
+          "package_name": "com.lgm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "248895029063-rqi26a26lnbiivk3hjl5m30u4pncf50r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeMtQ2lJByup0YqJIpOs1o6XYiy6-CRXs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "248895029063-rqi26a26lnbiivk3hjl5m30u4pncf50r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
