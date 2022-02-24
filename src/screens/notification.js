@@ -1,7 +1,7 @@
 import { View, Text, FlatList, ActivityIndicator, Keyboard, Image, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import {  TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { vw, vh } from '../constant';
 import Swipeout from 'react-native-swipeout';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -10,7 +10,7 @@ export default function notification(props) {
     const [todaydata, settodaydata] = useState([]);
     const [previousnotifications, setperiousnotification] = useState([]);
     const [isLoading, setIsLoading] = useState(true)
-   
+
     var swipeoutBtns = [
         {
             text: 'Delete',
@@ -99,9 +99,9 @@ export default function notification(props) {
 
                     axios.get("https://hitsofficialuae.com/lgm/api/home/deletenotification?notifiction_id=" + del_id, axiosConfig).then(res => {
                         console.log("RESPOMSEEEEEE check ", res.data);
-                      
-                      
 
+
+                        test();
 
 
                     }).catch(errr => {
@@ -139,15 +139,12 @@ export default function notification(props) {
                     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                         <SafeAreaView style={{ flex: 1, alignItems: "center", backgroundColor: '#fff', }}>
 
-
-
-
-
                             <View style={{
                                 position: 'absolute',
                                 left: vh * 0.040,
-                                marginVertical: 30,
-                                flexDirection: 'row'
+                                // marginVertical: 30,
+                                flexDirection: 'row',
+                                marginTop: 60,
                             }} >
                                 <TouchableOpacity style={{}}>
                                     <Image source={require('../assets/menu.png')} style={{
@@ -184,7 +181,11 @@ export default function notification(props) {
 
 
 
-                                        <Swipeout right={swipeoutBtns} autoClose={true} backgroundColor="transparent" width="100%">
+                                        <Swipeout right={[{
+                                            text: 'Delete',
+                                            backgroundColor: 'black',
+                                            onPress: () => { Delete(item?.notifiction_id) }
+                                        }]} autoClose={true} backgroundColor="transparent" width="100%">
                                             <View style={{ flexDirection: "row", width: vw * 0.9, marginVertical: 5 }}>
                                                 <Image source={{ "uri": item.image }} style={{ height: vh * 0.082, width: vw * 0.17, borderRadius: 30 }} />
                                                 <View style={{ flex: 3, alignItems: 'flex-start', marginVertical: 8, marginHorizontal: 10 }}>
@@ -224,7 +225,11 @@ export default function notification(props) {
 
 
 
-                                            <Swipeout right={swipeoutBtns} autoClose={true} backgroundColor="transparent" width="100%">
+                                            <Swipeout right={[{
+                                                text: 'Delete',
+                                                backgroundColor: 'black',
+                                                onPress: () => { Delete(item?.notifiction_id) }
+                                            }]} autoClose={true} backgroundColor="transparent" width="100%">
                                                 <View style={{ flexDirection: "row", width: vw * 0.9, marginVertical: 5 }}>
                                                     <Image source={{ "uri": item.image }} style={{ height: vh * 0.082, width: vw * 0.17, borderRadius: 30 }} />
                                                     <View style={{ flex: 3, alignItems: 'flex-start', marginVertical: 8, marginHorizontal: 10 }}>

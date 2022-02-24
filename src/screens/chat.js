@@ -88,7 +88,7 @@ export default function chat(props) {
                         <View style={{
                             position: 'absolute',
                             left: vh * 0.040,
-                            marginVertical: 20,
+                            marginVertical: 50,
                             flexDirection: 'row',
                             justifyContent: 'flex-start'
                         }} >

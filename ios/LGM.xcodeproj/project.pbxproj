@@ -15,6 +15,7 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		AD02B5E927C551D300F27C5B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AD02B5E827C551D300F27C5B /* GoogleService-Info.plist */; };
 		AD02B5EB27C554A700F27C5B /* Railway.otf in Resources */ = {isa = PBXBuildFile; fileRef = AD02B5EA27C554A700F27C5B /* Railway.otf */; };
+		AD30158227C80196006EF847 /* bgimg.png in Resources */ = {isa = PBXBuildFile; fileRef = AD30158127C80196006EF847 /* bgimg.png */; };
 		DD6A608DAA0C6A0863FE1EB2 /* libPods-LGM.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 081E1FC81DD3A9CAF8E3CE13 /* libPods-LGM.a */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +75,7 @@
 		AD02B5E827C551D300F27C5B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AD02B5EA27C554A700F27C5B /* Railway.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Railway.otf; sourceTree = "<group>"; };
 		AD02B5EC27C5561100F27C5B /* LGM.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = LGM.entitlements; path = LGM/LGM.entitlements; sourceTree = "<group>"; };
+		AD30158127C80196006EF847 /* bgimg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bgimg.png; path = ../src/assets/bgimg.png; sourceTree = "<group>"; };
 		B76D75988F09415DBB68BF0E /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		CA2E5442B39275F4563D8928 /* Pods-LGM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGM.release.xcconfig"; path = "Target Support Files/Pods-LGM/Pods-LGM.release.xcconfig"; sourceTree = "<group>"; };
 		D075135D1CDE408EA295FD0E /* Raleway-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Raleway-ExtraLightItalic.ttf"; path = "../src/assets/fonts/Raleway-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 		13B07FAE1A68108700A75B9A /* LGM */ = {
 			isa = PBXGroup;
 			children = (
+				AD30158127C80196006EF847 /* bgimg.png */,
 				AD02B5EC27C5561100F27C5B /* LGM.entitlements */,
 				AD02B5EA27C554A700F27C5B /* Railway.otf */,
 				AD02B5E827C551D300F27C5B /* GoogleService-Info.plist */,
@@ -332,6 +335,7 @@
 				AD02B5EB27C554A700F27C5B /* Railway.otf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				AD30158227C80196006EF847 /* bgimg.png in Resources */,
 				AD02B5E927C551D300F27C5B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
