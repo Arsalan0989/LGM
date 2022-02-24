@@ -171,7 +171,7 @@ export default function DocTalk(props) {
             <ImageBackground source={require('../assets/userSignup.png')} resizeMode='cover' style={{ alignItems: "center", width: "100%", height: vh }}>
 
                 <View style={{ flexDirection: 'row', marginRight: vw * 0.55, padding: 20 }}>
-                    <TouchableOpacity >
+                    <TouchableOpacity onPress={()=>{props.navigation.navigate('myTab')}} > 
                         <Image source={require('../assets/menu.png')} style={{ height: 17, width: 17, marginRight: 30, padding: 7, }} />
                     </TouchableOpacity>
                     <Text style={{ color: '#000', fontWeight: 'bold', fontSize: 17 }}>

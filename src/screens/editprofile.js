@@ -9,6 +9,7 @@ import * as ImagePicker from "react-native-image-picker";
 
 export default function editprofile(props) {
     const [userId, setUserId] = React.useState('');
+    const [isLoading, setIsLoading] = useState(true)
 
     const [Email, setemail] = React.useState('');
     const [mobile, setmobile] = React.useState('');
@@ -77,7 +78,7 @@ export default function editprofile(props) {
         else {
 
             setLoader(true)
-            var postData =  {
+            var postData = {
                 'user_id': userId,
                 'email': Email,
                 'phonenumber': mobile,
@@ -95,7 +96,7 @@ export default function editprofile(props) {
 
                             headers: {
                                 'Authorization': access_token,
-                                'Content-Type':'application/json'
+                                'Content-Type': 'application/json'
                             }
                         };
 
@@ -153,8 +154,9 @@ export default function editprofile(props) {
                         }
                     };
                     axios.get("https://hitsofficialuae.com/lgm/api/profile/getUserallProfileData?user_id=" + userDetails.customer_id, axiosConfig).then(res => {
+                        setIsLoading(false)
                         setUserId(value => (userDetails.customer_id))
-                        setAccessToken("Bearer "+userDetails.access_token);
+                        setAccessToken("Bearer " + userDetails.access_token);
                         // console.log("RESPOMSEEEEEE", res.data.data.user_details);
                         setemail(value => (res.data.data.user_details.email))
                         setmobile(value => (res.data.data.user_details.mobileNumber))
@@ -194,22 +196,26 @@ export default function editprofile(props) {
     const renderButton = () => {
         if (loaderr) {
             return (
-                <View style={{alignSelf:'center'}}>
+                <View style={{ alignSelf: 'center' }}>
                     <ActivityIndicator color="black" size="small" />
                 </View>
             )
         }
         else {
             return (
-                <View style={{alignSelf:'center'}}>
-                <TouchableOpacity onPress={() => { update() }} style={{ width: vh * 0.4, borderRadius: 20, backgroundColor: "#333", marginTop: 10,alignItems:"center" }}>
-                    <Text style={{ color: "white", textAlign: 'center', paddingVertical: 12, fontWeight: "bold" }}>UPDATE PROFILE</Text>
-                </TouchableOpacity>
+                <View style={{ alignSelf: 'center' }}>
+                    <TouchableOpacity onPress={() => { update() }} style={{ width: vh * 0.4, borderRadius: 20, backgroundColor: "#333", marginTop: 10, alignItems: "center" }}>
+                        <Text style={{ color: "white", textAlign: 'center', paddingVertical: 12, fontWeight: "bold" }}>UPDATE PROFILE</Text>
+                    </TouchableOpacity>
                 </View>
             )
         }
     }
-    return (
+    {
+        return isLoading ? <View style={{flex:1,justifyContent:'center'}}>
+            <ActivityIndicator color="black" size="large" />
+            </View>
+             : (
         <SafeAreaView style={{ flex: 1, alignItems: "center", backgroundColor: '#fff' }}>
             <KeyboardAvoidingView>
                 <ScrollView>
@@ -229,11 +235,11 @@ export default function editprofile(props) {
                         </View>
                         <View >
                             <TouchableOpacity onPress={chooseFile}>
-                            {
+                                {
 
-                              filePath!=""?<Image source={{uri:`data:image/jpeg;base64,${filePath}`}} style={{ height: 180, width: 180, borderRadius: 85 }} />:<Image source={profileimage} style={{ height: 180, width: 180, borderRadius: 85 }} />
+                                    filePath != "" ? <Image source={{ uri: `data:image/jpeg;base64,${filePath}` }} style={{ height: 180, width: 180, borderRadius: 85 }} /> : <Image source={profileimage} style={{ height: 180, width: 180, borderRadius: 85 }} />
 
-                            }
+                                }
                             </TouchableOpacity>
                         </View>
 
@@ -242,7 +248,7 @@ export default function editprofile(props) {
                     </ImageBackground>
 
                     <View style={{ alignItems: 'flex-start', padding: 20 }}>
-                        <Text style={{ color: 'black', fontWeight: 'bold',marginLeft:15 }}>
+                        <Text style={{ color: 'black', fontWeight: 'bold', marginLeft: 15 }}>
                             Email
                         </Text>
                         <TextInput
@@ -261,7 +267,7 @@ export default function editprofile(props) {
                             onChangeText={setemail}
                             value={Email}
                         />
-                        <Text style={{ color: 'black',  fontWeight: 'bold',marginLeft:12 }}>
+                        <Text style={{ color: 'black', fontWeight: 'bold', marginLeft: 12 }}>
                             Phone Number
                         </Text>
                         <TextInput
@@ -283,7 +289,7 @@ export default function editprofile(props) {
                             onChangeText={setmobile}
                             value={mobile}
                         />
-                        <Text style={{ color: 'black', fontWeight: 'bold',marginLeft:13  }}>
+                        <Text style={{ color: 'black', fontWeight: 'bold', marginLeft: 13 }}>
                             Location
                         </Text>
                         <TextInput
@@ -313,4 +319,5 @@ export default function editprofile(props) {
 
         </SafeAreaView>
     );
+                        }
 }

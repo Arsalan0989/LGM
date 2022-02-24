@@ -14,7 +14,7 @@ export default function SignupDetails(props) {
 
                 <View style={{ marginBottom: 30, alignItems: "center" }}>
                     <Text style={{ fontWeight: "bold", color: '#000' }}>START FOR FREE</Text>
-                    <Text style={{ fontWeight: "bold", color: '#000', fontSize: 24, marginBottom: 25 }}>Sign up to LGM</Text>
+                    <Text style={{ fontWeight: "bold", color: '#000', fontSize: 24, marginBottom: 25 }}>Signup on LGM</Text>
 
                     <TouchableOpacity  onPress={() => { props.navigation.navigate("UserSignup") }} style={{ borderRadius: 20, backgroundColor: "#333" }}>
                         <Text style={{ color: "white", paddingHorizontal: 80, paddingVertical: 12, fontWeight: "bold" }}>SIGNUP AS USER</Text>

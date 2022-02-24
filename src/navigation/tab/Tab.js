@@ -69,7 +69,13 @@ export default function myTab(props) {
   }
 
   return (
-    <Tab.Navigator>
+    <Tab.Navigator    tabBarOptions={{
+      activeTintColor: '#D1A82A',
+      inactiveTintColor: '#000',
+      showLabel: true,
+      style: {backgroundColor: '#fff',},
+    }}>
+      
       <Tab.Screen name="Home" component={HomeScreen} options={{
 
         tabBarIcon: () => {

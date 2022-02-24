@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, StatusBar, SafeAreaView, TouchableHighlight, TextInput, StyleSheet, FlatList, TouchableOpacity, ImageBackground, Dimensions, Image, Text } from 'react-native'
+import { View, StatusBar, SafeAreaView, TouchableHighlight, ActivityIndicator,TextInput, StyleSheet, FlatList, TouchableOpacity, ImageBackground, Dimensions, Image, Text } from 'react-native'
 import { vw, vh } from '../constant';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
@@ -42,7 +42,7 @@ export default function HomeScreen(props) {
         setModalVisible(!isModalVisible);
     };
     const [loaderr, setLoader] = useState(false)
-
+    const [isLoading, setIsLoading] = useState(true)
     const [blogData, setBlogData] = useState([])
     const [chatId, setChatId] = useState()
     const [querySuccess, setquerySuccess] = useState([])
@@ -122,6 +122,7 @@ export default function HomeScreen(props) {
                     };
                     axios.get("https://hitsofficialuae.com/lgm/api/home/getHomeData?user_id=" + userDetails.customer_id, axiosConfig).then(res => {
                         console.log("RESPOMSEEEEEE", res.data.data.news);
+                        setIsLoading(false);
 
 
                         let tempArr = []
@@ -157,6 +158,7 @@ export default function HomeScreen(props) {
             //https://hitsofficialuae.com/lgm/api/guest/getHomeData
             axios.get("https://hitsofficialuae.com/lgm/api/guest/getHomeData", axiosConfig).then(res => {
                 console.log("RESPOMSEEEEEE", res.data.data.news);
+                setIsLoading(false);
 
 
                 let tempArr = []
@@ -245,14 +247,14 @@ export default function HomeScreen(props) {
         return (
             <ImageBackground source={{ uri: item.photo }} resizeMode='cover' style={{ height: vh * 0.38, width: '100%', }}
                 imageStyle={{ borderRadius: 40, borderTopLeftRadius: 0, borderTopRightRadius: 0 }}>
-                <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-end', alignSelf: 'flex-end', paddingRight: vh * 0.04, paddingVertical: vh * 0.095 }}>
+                <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-end', alignSelf: 'flex-end', paddingRight: vh * 0.1, marginBottom: vh * 0.12 }}>
                     <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 35 }}>{item.title}</Text>
                     <Text style={{ color: '#fff', fontSize: 16 }}> {item.subtitle}</Text>
-                    <View style={{ marginTop: 10 }}>
+                    {/* <View style={{ marginTop: 10 }}>
                         <TouchableOpacity style={{ width: vh * 0.17, borderRadius: 20, backgroundColor: "#D1A82A", }}>
                             <Text style={{ color: "white", textAlign: 'center', paddingVertical: 5, fontWeight: '300', }}>{item.button_title}</Text>
                         </TouchableOpacity>
-                    </View>
+                    </View> */}
                 </View>
             </ImageBackground>
         );
@@ -276,15 +278,18 @@ export default function HomeScreen(props) {
                     borderRadius: 5,
                     marginHorizontal: 8,
                     backgroundColor: '#123'
-                    // Define styles for inactive dots here
                 }}
                 inactiveDotOpacity={0.4}
                 inactiveDotScale={0.6}
             />
         );
     }
-    return (
-
+   
+    {
+        return isLoading ? <View style={{flex:1,justifyContent:'center'}}>
+            <ActivityIndicator color="black" size="large" />
+            </View>
+             : (
         <SafeAreaView style={{ flex: 1, alignItems: "center", backgroundColor: '#fff' }}>
             <ImageBackground source={require('../assets/userSignup.png')} resizeMode='cover' style={{ alignItems: "center", width: "100%", height: vh, }}>
                 <View style={{ height: vh * 0.38, width: '100%' }} >
@@ -429,7 +434,8 @@ export default function HomeScreen(props) {
 
 
 
-    )
+    );
+                                }
 }
 
 const styles = StyleSheet.create({

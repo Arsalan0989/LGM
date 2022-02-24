@@ -12,6 +12,8 @@ export default function profile(props) {
     const [cpassword, setcpassword] = React.useState('');
     const [isModalVisible, setModalVisible] = useState(false);
     const [loaderr, setLoader] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
+
     const [userId, setUserId] = React.useState('');
     const [email, setemail] = useState('')
     const [mobile, setmobile] = useState('')
@@ -44,6 +46,7 @@ export default function profile(props) {
                     axios.get("https://hitsofficialuae.com/lgm/api/profile/getUserallProfileData?user_id=" + userDetails.customer_id, axiosConfig).then(res => {
                         console.log("RESPOMSEEEEEE", res.data.data.user_details);
                         console.log("userrrrr iddd", userDetails.role_id);
+                        setIsLoading(false)
                         setUserId(userDetails.customer_id);
                         // setemail(res.data.data.user_details.email)
                         setemail(value => (res.data.data.user_details.email))
@@ -144,7 +147,11 @@ export default function profile(props) {
             )
         }
     }
-    return (
+    {
+        return isLoading ? <View style={{flex:1,justifyContent:'center'}}>
+            <ActivityIndicator color="black" size="large" />
+            </View>
+             : (
         <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             style={{ flex: 1 }}
@@ -377,4 +384,5 @@ export default function profile(props) {
 
         </KeyboardAvoidingView>
     );
+                                }
 }

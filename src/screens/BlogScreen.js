@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { View, ScrollView, SafeAreaView, StyleSheet, Keyboard, TextInput, TouchableOpacity, KeyboardAvoidingView, TouchableWithoutFeedback, ImageBackground, Image, Text } from 'react-native'
+import { View, ScrollView, SafeAreaView, StyleSheet,ActivityIndicator,TouchableOpacity, ImageBackground, Image, Text } from 'react-native'
 import { vw, vh } from '../constant';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
 export default function BlogScreen(props) {
+    const [isLoading, setIsLoading] = useState(true)
 
     const [newsImage, setnewsImage] = useState("")
     const [newsTitle, setnewsTitle] = useState("")
@@ -49,6 +50,7 @@ export default function BlogScreen(props) {
 
                     axios.get("https://hitsofficialuae.com/lgm/api/home/singleblog?user_id=" + userDetails.customer_id + "&news_id=" + props.route.params.news_id, axiosConfig).then(res => {
                         console.log("RESPOMSEEEEEE check ", res.data.next_id);
+                        setIsLoading(false);
                         setnext(res.data.next_id)
                         setprev(res.data.previous_id)
                         setnewsImage(res.data.data.news_image)
@@ -91,8 +93,11 @@ export default function BlogScreen(props) {
     }, [])
 
 
-    return (
-
+    {
+        return isLoading ? <View style={{flex:1,justifyContent:'center'}}>
+            <ActivityIndicator color="black" size="large" />
+            </View>
+             : (
 
         <SafeAreaView style={{ flex: 1, alignItems: "center", backgroundColor: '#fff', position: 'relative' }}>
 
@@ -159,7 +164,8 @@ export default function BlogScreen(props) {
 
 
 
-    )
+    );
+        }
 }
 
 const styles = StyleSheet.create({

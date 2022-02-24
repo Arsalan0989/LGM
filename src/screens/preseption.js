@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, StatusBar, SafeAreaView, StyleSheet, FlatList, TouchableOpacity, ImageBackground,  PermissionsAndroid, Image, Platform, Text } from 'react-native'
+import { View, StatusBar, SafeAreaView, ActivityIndicator, FlatList, TouchableOpacity, ImageBackground,  PermissionsAndroid, Image, Platform, Text } from 'react-native'
 import { Item } from 'react-native-paper/lib/typescript/components/List/List';
 import { vw, vh } from '../constant';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -10,6 +10,7 @@ import RNFetchBlob from 'rn-fetch-blob';
 export default function preseption(props) {
     const [blogData, setBlogData] = useState([])
     const [image, setimage] = useState([]);
+    const [isLoading, setIsLoading] = useState(true)
 
     const preseptiondata = [
         {
@@ -40,6 +41,7 @@ export default function preseption(props) {
                     };
 
                     axios.get("https://hitsofficialuae.com/lgm/api/home/precriptions?user_id=" + userDetails.customer_id, axiosConfig).then(res => {
+                        setIsLoading(false);
 
                         let tempArr = []
                         res.data.data.map((item) => {
@@ -147,7 +149,11 @@ export default function preseption(props) {
         predata();
     }, [])
 
-    return (
+    {
+        return isLoading ? <View style={{flex:1,justifyContent:'center'}}>
+            <ActivityIndicator color="black" size="large" />
+            </View>
+             : (
         <SafeAreaView style={{ flex: 1, alignItems: "center", backgroundColor: '#fff' }}>
 
             <ImageBackground source={require('../assets/userSignup.png')} resizeMode='cover' style={{ alignItems: "center", width: "100%", height: vh, }}>
@@ -221,5 +227,6 @@ export default function preseption(props) {
 
 
         </SafeAreaView>
-    )
+    );
+                }
 }

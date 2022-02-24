@@ -73,22 +73,17 @@ export default function chat(props) {
         test();
     }, [])
 
-
-
-
-
-
     {
-        return isLoading ? (<ActivityIndicator />) : (
+        return isLoading ? <View style={{flex:1,justifyContent:'center'}}>
+            <ActivityIndicator color="black" size="large" />
+            </View>
+             : (
             <KeyboardAvoidingView
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
                 style={{ flex: 1 }}
             >
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <SafeAreaView style={{ flex: 1, alignItems: "center", backgroundColor: '#fff' }}>
-
-
-
 
                         <View style={{
                             position: 'absolute',
@@ -97,7 +92,7 @@ export default function chat(props) {
                             flexDirection: 'row',
                             justifyContent: 'flex-start'
                         }} >
-                            <TouchableOpacity onPress={() => { props.navigation.navigate("myTabs") }}>
+                            <TouchableOpacity >
                                 <Image source={require('../assets/menu.png')} style={{
                                     height: 12,
                                     width: 22,
@@ -141,12 +136,6 @@ export default function chat(props) {
                             )}
                         />
 
-
-
-
-
-
-
                         <FlatList
                             showsVerticalScrollIndicator={false}
                             data={blogData}
@@ -178,17 +167,8 @@ export default function chat(props) {
                                         </View>
                                     </TouchableOpacity>
                                 </View>
-
-
-
                             )}
                         />
-
-
-
-
-
-
 
                     </SafeAreaView>
                 </TouchableWithoutFeedback>

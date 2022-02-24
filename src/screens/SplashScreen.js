@@ -66,7 +66,7 @@ export default function SplashScreen(props) {
 
       });
 
-    }, 10000)
+    }, 5000)
 
   }, [])
 

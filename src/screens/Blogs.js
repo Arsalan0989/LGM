@@ -1,96 +1,14 @@
 import React, { useEffect,useState } from 'react'
-import { View, ScrollView, SafeAreaView, StyleSheet, Keyboard,FlatList, TextInput, TouchableOpacity, KeyboardAvoidingView, TouchableWithoutFeedback, ImageBackground, Image, Text } from 'react-native'
+import { View, ScrollView, SafeAreaView, ActivityIndicator,FlatList, TouchableOpacity, ImageBackground, Image, Text } from 'react-native'
 import { vw, vh } from '../constant';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
 export default function HomeScreen(props) {
 
     const [blogData,setBlogData] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
-    const message = [
-        {
-            id: '1',
-            UserName: 'Mark Thomsan',
-            userImg: require('../assets/image.png'),
-            messageTime: '10.0',
-            messageText: 'Lorem ipsum dolor sit amet.'
-
-        },
-        {
-            id: '2',
-            UserName: 'Patricia Sel',
-            userImg: require('../assets/image11.png'),
-            messageTime: '10.0',
-            messageText: 'Lorem ipsum dolor sit amet.'
-
-        },
-        {
-            id: '3',
-            UserName: 'Mary Thomsan',
-            userImg: require('../assets/image.png'),
-            messageTime: '10.0',
-            messageText: 'Lorem ipsum dolor sit amet.'
-
-        },
-        {
-            id: '4',
-            UserName: 'Robert Thomsan',
-            userImg: require('../assets/image11.png'),
-            messageTime: '10.0',
-            messageText: 'Lorem ipsum dolor sit amet.'
-
-        },
-        {
-            id: '5',
-            UserName: 'David Thomsan',
-            userImg: require('../assets/image.png'),
-            messageTime: '10.0',
-            messageText: 'Lorem ipsum dolor sit amet.'
-
-        },
-        {
-            id: '6',
-            UserName: 'Johnny Thomsan',
-            userImg: require('../assets/image11.png'),
-            messageTime: '10.0',
-            messageText: 'Lorem ipsum dolor sit amet.'
-
-        },
-        {
-            id: '7',
-            UserName: 'Louis Thomsan',
-            userImg: require('../assets/image.png'),
-            messageTime: '10.0',
-            messageText: 'Lorem ipsum dolor sit amet.'
-
-        },
-        {
-            id: '8',
-            UserName: 'Mark Thomsan',
-            userImg: require('../assets/image11.png'),
-            messageTime: '10.0',
-            messageText: 'Lorem ipsum dolor sit amet.'
-
-        },
-        {
-            id: '9',
-            UserName: 'Thomus Thomsan',
-            userImg: require('../assets/image.png'),
-            messageTime: '10.0',
-            messageText: 'Lorem ipsum dolor sit amet.'
-
-        },
-        {
-            id: '10',
-            UserName: 'Jelye Thomsan',
-            userImg: require('../assets/image11.png'),
-            messageTime: '10.0',
-            messageText: 'Lorem ipsum dolor sit amet.'
-
-        },
-
-    ]
-
+   
     const getUserData = () => {
         let userDetails = {};
         try {
@@ -113,6 +31,7 @@ export default function HomeScreen(props) {
                     axios.get("https://hitsofficialuae.com/lgm/api/home/blogs?user_id=" + userDetails.customer_id, axiosConfig).then(res => {
                         console.log("RESPOMSEEEEEE", res.data.data.news);
                         console.log("RESPOMSEEEEEE", res.data.data.featured);
+                        setIsLoading(false)
                         let tempArr = []
                         res.data.data.news.map((item)=>{
                             tempArr.push(item)
@@ -176,7 +95,11 @@ export default function HomeScreen(props) {
       })
     }, [])
 
-    return (
+    {
+        return isLoading ? <View style={{flex:1,justifyContent:'center'}}>
+            <ActivityIndicator color="black" size="large" />
+            </View>
+             : (
         //     <KeyboardAvoidingView
         //     behavior={Platform.OS === "ios" ? "padding" : "height"}
         //     style={styles.container}
@@ -268,4 +191,5 @@ export default function HomeScreen(props) {
 
         //    </KeyboardAvoidingView>
     )
+                        }
 }

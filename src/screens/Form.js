@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { View, ScrollView, SafeAreaView, StyleSheet, Keyboard, TouchableOpacity, KeyboardAvoidingView, TouchableWithoutFeedback, ImageBackground, Image, Text } from 'react-native'
+import React, { useEffect,useState } from 'react'
+import { View, ScrollView, SafeAreaView, StyleSheet,ActivityIndicator, Keyboard, TouchableOpacity, KeyboardAvoidingView, TouchableWithoutFeedback, ImageBackground, Image, Text } from 'react-native'
 import { vw, vh } from '../constant';
 import { TextInput } from 'react-native-paper';
 import axios from 'axios';
@@ -20,8 +20,10 @@ export default function Form() {
     const [name, setname] = React.useState('');
     const [mobile, setmobile] = React.useState('');
     const [message, setmessage] = React.useState('');
+    const [loaderr, setLoader] = useState(false)
+
     const support = () => {
-        // setLoader(true)
+        setLoader(true)
         var postData = {
 
             userid: userId,
@@ -57,18 +59,18 @@ export default function Form() {
                             setmobile("")
                             setmessage("")
                             alert(resp.data.data)
-                            //    setLoader(false)
+                               setLoader(false)
 
                         } else {
                             alert(resp.data.data)
-                            // setLoader(false)
+                            setLoader(false)
                         }
 
                     })
                         .catch(err => {
                             console.log(err, "Errorrr");
                             alert(err.message)
-                            // setLoader(false)
+                            setLoader(false)
                         })
                 } else {
                     console.log(err)
@@ -80,64 +82,28 @@ export default function Form() {
 
 
     }
+    const renderButton = () => {
+        if (loaderr) {
+            return (
+                <View style={{ marginVertical: 10, alignItems: 'center' }}>
+                    <ActivityIndicator color="black" size="small" />
+                </View>
+            )
+        }
+        else {
+            return (
+                  <View style={{ marginVertical: 10, alignItems: 'center' }}>
+                <TouchableOpacity onPress={() => { support() }} style={{ borderRadius: 20, backgroundColor: "#333", }}>
+                    <Text style={{ color: "white", paddingHorizontal: vw * 0.35, paddingVertical: 12, fontWeight: "bold" }}>
+                        SEND
+                    </Text>
+                </TouchableOpacity>
+            </View>
+            )
+        }
+    }
 
 
-
-    // const getUserData = () => {
-    //     let userDetails = null;
-    //     try {
-    //         AsyncStorage.getItem('user', (err, userData) => {
-    //             if (userData) {
-
-    //                 console.log("================================================>")
-    //                 console.log(JSON.parse(userData));
-    //                 console.log("================================================>")
-    //                 userDetails = JSON.parse(userData)
-    //                 let axiosConfig = {
-
-    //                     headers: {
-    //                         'Content-Type': 'application/json;charset=UTF-8',
-    //                         "Access-Control-Allow-Origin": "*",
-    //                         "Authorization": "Bearer " + userDetails.access_token,
-    //                         "Cookie": "ci_session=2c33c56a0c53ea95f57b3ed3e827d128efe88050"
-    //                     }
-    //                 };
-    //                 axios.post("https://hitsofficialuae.com/lgm/api/home/sendinquiry" + userDetails.customer_id, axiosConfig).then(resp => {
-    //                 setUserId(value=>(userDetails.customer_id))    
-    //                 console.log(resp, "RESPONSEEEEE");
-    //        if (resp.status == "200") {
-    //             setname("")
-    //             setmobile("")
-    //             setmessage("")
-    //             alert(resp.data.data)
-    //             //    setLoader(false)
-
-    //                    } else {
-    //                     alert(resp.data.data)
-    //                     // setLoader(false)
-    //                 }
-
-    //             })
-    //             .catch(err => {
-    //                 console.log(err, "Errorrr");
-    //                 alert(err.message)
-    //                 // setLoader(false)
-    //             })
-    //             } else {
-    //                 console.log(err)
-    //             }
-    //         });
-    //     } catch (error) {
-    //         console.log("Error retrieving data" + error);
-    //     }
-
-
-
-
-
-
-
-    // }
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -227,13 +193,7 @@ export default function Form() {
                                         value={message}
                                     />
                                 </View>
-                                <View style={{ marginVertical: 10, alignItems: 'center' }}>
-                                    <TouchableOpacity onPress={() => { support() }} style={{ borderRadius: 20, backgroundColor: "#333", }}>
-                                        <Text style={{ color: "white", paddingHorizontal: vw * 0.35, paddingVertical: 12, fontWeight: "bold" }}>
-                                            SEND
-                                        </Text>
-                                    </TouchableOpacity>
-                                </View>
+                                {renderButton()}
                             </View>
 
 

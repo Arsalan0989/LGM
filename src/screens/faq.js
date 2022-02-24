@@ -7,33 +7,7 @@ import { TextInput, List } from 'react-native-paper';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 export default function faq(props) {
-    const message = [
-        {
-            id: '1',
-            title: 'James',
-            userImg: require('../assets/close2.png'),
-
-            messageText: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum has been the industrys standard dummy text.',
-
-
-        },
-        {
-            id: '2',
-            title: 'Patricia',
-            userImg: require('../assets/close2.png'),
-
-            messageText: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum has been the industrys standard dummy text.',
-
-        },
-        {
-            id: '3',
-            title: 'Mary',
-            userImg: require('../assets/close2.png'),
-
-            messageText: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum has been the industrys standard dummy text.',
-
-        },
-    ]
+   
     const [expanded, setExpanded] = React.useState(true);
     const handlePress = () => setExpanded(!expanded);
     const [search, setsearch] = React.useState('');
@@ -180,8 +154,8 @@ export default function faq(props) {
                                         titleStyle={{ color: '#000' }}
                                         right={props => <List.Icon {...props} icon={({ size, color }) => (
                                             <Image
-                                                source={require('../assets/close2.png')}
-                                                style={{ width: size, height: size, tintColor: color }}
+                                                source={require('../assets/down.png')}
+                                                style={{height:20,width:12 }}
                                             />
                                         )} />}>
 
