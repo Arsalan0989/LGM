@@ -109,9 +109,9 @@ export default function HomeScreen(props) {
 
             <ImageBackground source={require('../assets/userSignup.png')} resizeMode='cover' style={{ alignItems: "center", width: "100%", height: vh, }}>
 
-                <View style={{ flexDirection: 'row', marginRight: vw * 0.6, padding: 10 }}>
-                    <TouchableOpacity >
-                        <Image source={require('../assets/menu.png')} style={{ height: 17, width: 17, marginRight: 30, padding: 7, }} />
+                <View style={{ flexDirection: 'row', marginRight: vw * 0.6, padding: 10,marginVertical:5 }}>
+                    <TouchableOpacity onPress={()=>{props.navigation.navigate('myTab')}} >
+                        <Image source={require('../assets/back.png')} style={{ height: 17, width: 27, marginRight: 20, padding: 7, }} />
                     </TouchableOpacity>
                     <Text style={{ color: '#000', fontWeight: 'bold', fontSize: 16 }}>
                         Blog

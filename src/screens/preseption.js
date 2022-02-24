@@ -5,6 +5,7 @@ import { vw, vh } from '../constant';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
 import RNFetchBlob from 'rn-fetch-blob';
+import { set } from 'react-native-reanimated';
 
 
 export default function preseption(props) {
@@ -12,14 +13,7 @@ export default function preseption(props) {
     const [image, setimage] = useState([]);
     const [isLoading, setIsLoading] = useState(true)
 
-    const preseptiondata = [
-        {
-            id: '1',
-            preseptiontime: '8:00 am',
-            preseptionText: '  Lorem ipsum Prescription',
-            preseption: require('../assets/presep.png'),
-        }
-    ]
+    
 
     const predata = () => {
         let userDetails = {};
@@ -48,7 +42,6 @@ export default function preseption(props) {
                             tempArr.push(item)
                         })
                         setBlogData(tempArr)
-
                         // let imagedata = []
                         // res.data.data.image.map((item)=>{
                         //     imagedata.push(item)
@@ -66,6 +59,51 @@ export default function preseption(props) {
             console.log("Error retrieving data" + error);
         }
    }
+
+
+   const Delete = (del_id) => {
+    let userDetails = {};
+    try {
+        AsyncStorage.getItem('user', (err, userData) => {
+            if (userData) {
+                console.log(JSON.parse(userData));
+                userDetails = JSON.parse(userData)
+                let axiosConfig = {
+                    headers: {
+                        'Content-Type': 'application/json;charset=UTF-8',
+                        "Access-Control-Allow-Origin": "*",
+                        "Authorization": "Bearer " + userDetails.access_token,
+                        "Cookie": "ci_session=2c33c56a0c53ea95f57b3ed3e827d128efe88050"
+                    }
+                };
+
+                axios.get("https://hitsofficialuae.com/lgm/api/home/deleteprescription?prescription_id=" + del_id, axiosConfig).then(res => {
+                    console.log("RESPOMSEEEEEE check ", res.data);
+                  
+                  
+
+
+
+                }).catch(errr => {
+                    console.log("ERRRRRRRrrrrrrrrrrrr", errr);
+                })
+            } else {
+                console.log(err)
+            }
+        });
+    } catch (error) {
+        console.log("Error retrieving data" + error);
+    }
+
+
+
+
+
+
+
+}
+
+
 
   const checkPermission = async (url) => {
 

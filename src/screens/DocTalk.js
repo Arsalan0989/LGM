@@ -24,12 +24,14 @@ export default function DocTalk(props) {
     const [isSelected, setisSelected] = useState(false);
     const [value, setValue] = useState("");
     const [items, setItems] = useState([
-        { label: 'I am addicted to gaming', value: 'I am addicted to gaming' },
-        { label: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit' },
-        { label: 'Duis aute irure dolor in reprehenderit', value: 'Duis aute irure dolor in reprehenderit' },
-        { label: 'Duis in reprehenderit', value: 'Duis in reprehenderit' },
-        { label: 'esse cillum dolore eu fugiat nulla pariatur', value: 'esse cillum dolore eu fugiat nulla pariatur' },
-        { label: 'excepteur sint occaecat cupidatat non proident,', value: 'excepteur sint occaecat cupidatat non proident' },
+        { label: 'Repeated failed attempts to stop or control the gambling', value: 'Repeated failed attempts to stop or control the gambling' },
+        { label: 'Borrowing money to gamble or pay gambling debts', value: 'Borrowing money to gamble or pay gambling debts' },
+        { label: 'Gambling to escape worry or trouble', value: 'Gambling to escape worry or trouble' },
+        { label: 'Neglecting the care of ones self or family in order to gamble', value: 'Neglecting the care of ones self or family in order to gamble' },
+        { label: 'Lying about the amount of time and money spent on gambling', value: 'Lying about the amount of time and money spent on gambling' },
+        { label: 'Gambling more money in an attempt to win back losses', value: 'Gambling more money in an attempt to win back losses' },
+        { label: 'Selling personal possessions to get money to gamble', value: 'Selling personal possessions to get money to gamble' },
+        { label: 'Feelings of hopelessness, depression, or suicide as a result of gambling', value: 'Feelings of hopelessness, depression, or suicide as a result of gambling' },
     ]);
     const [loaderr, setLoader] = useState(false)
     const [isModalVisible, setModalVisible] = useState(false);
