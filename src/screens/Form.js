@@ -15,7 +15,7 @@ const UselessTextInput = (props) => {
         />
     );
 }
-export default function Form() {
+export default function Form(props) {
     const [userId, setUserId] = React.useState('');
     const [name, setname] = React.useState('');
     const [mobile, setmobile] = React.useState('');
@@ -110,8 +110,18 @@ export default function Form() {
             style={styles.container}
         >
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+
                 <ScrollView>
                     <SafeAreaView style={{ flex: 1, alignItems: "center", backgroundColor: '#fff' }}>
+                    <View style={{ flexDirection: 'row', marginRight: vw * 0.6, padding: 10,marginVertical:5 }}>
+                    <TouchableOpacity onPress={()=>{props.navigation.navigate('BlogScreen')}} >
+                        <Image source={require('../assets/back.png')} style={{ height: 17, width: 27, marginRight: 15, padding: 0, }} />
+                    </TouchableOpacity>
+                    <Text style={{ color: '#000', fontWeight: 'bold', fontSize: 16 }}>
+                        Support
+                    </Text>
+
+                </View>
 
                         <ImageBackground source={require('../assets/userSignup.png')} resizeMode='cover' style={{ alignItems: "center", width: "100%", height: vh, }}>
                             {/* checking */}
