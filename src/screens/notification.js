@@ -1,7 +1,7 @@
-import { View, Text, ImageBackground, TextInput, FlatList, ActivityIndicator, Keyboard, Image, KeyboardAvoidingView, TouchableWithoutFeedback, Button } from 'react-native';
+import { View, Text, FlatList, ActivityIndicator, Keyboard, Image, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import {  TouchableOpacity } from 'react-native-gesture-handler';
 import { vw, vh } from '../constant';
 import Swipeout from 'react-native-swipeout';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -10,12 +10,12 @@ export default function notification(props) {
     const [todaydata, settodaydata] = useState([]);
     const [previousnotifications, setperiousnotification] = useState([]);
     const [isLoading, setIsLoading] = useState(true)
-    const [deletedata, setdeletedata] = useState('');
+   
     var swipeoutBtns = [
         {
             text: 'Delete',
             backgroundColor: 'black',
-            onPress: () => { setdeletedata(Delete) }
+            onPress: () => { Delete() }
         }
 
     ]
@@ -81,7 +81,7 @@ export default function notification(props) {
     }, [])
 
 
-    const Delete = () => {
+    const Delete = (del_id) => {
         let userDetails = {};
         try {
             AsyncStorage.getItem('user', (err, userData) => {
@@ -97,9 +97,9 @@ export default function notification(props) {
                         }
                     };
 
-                    axios.get("https://hitsofficialuae.com/lgm/api/home/deletenotification?" + userDetails.customer_id, axiosConfig).then(res => {
+                    axios.get("https://hitsofficialuae.com/lgm/api/home/deletenotification?notifiction_id=" + del_id, axiosConfig).then(res => {
                         console.log("RESPOMSEEEEEE check ", res.data);
-                        deletedata('')
+                      
                       
 
 
@@ -123,9 +123,9 @@ export default function notification(props) {
 
     }
 
-    useEffect(() => {
-        Delete();
-    }, [])
+    // useEffect(() => {
+    //     Delete();
+    // }, [])
 
     {
         return isLoading ? <View style={{ flex: 1, justifyContent: 'center' }}>
