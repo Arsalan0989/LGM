@@ -1,4 +1,4 @@
-import { View, Text, FlatList, ActivityIndicator, Keyboard, Image, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, FlatList, Platform, PlatformIOSStatic, ActivityIndicator, Keyboard, Image, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -6,6 +6,7 @@ import { vw, vh } from '../constant';
 import Swipeout from 'react-native-swipeout';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
+
 export default function notification(props) {
     const [todaydata, settodaydata] = useState([]);
     const [previousnotifications, setperiousnotification] = useState([]);
@@ -122,47 +123,77 @@ export default function notification(props) {
 
 
     }
+    console.log('====================================');
+    console.log(Platform.OS);
+    console.log('====================================');
 
     // useEffect(() => {
     //     Delete();
     // }, [])
 
+
     {
+
         return isLoading ? <View style={{ flex: 1, justifyContent: 'center' }}>
             <ActivityIndicator color="black" size="large" />
         </View>
             : (
                 <KeyboardAvoidingView
-                    behavior={Platform.OS === "ios" ? "padding" : "height"}
+                    behavior={Platform.OS === "android" ? "padding" : "height"}
                     style={{ flex: 1 }}
                 >
                     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                         <SafeAreaView style={{ flex: 1, alignItems: "center", backgroundColor: '#fff', }}>
-
-                            <View style={{
-                                position: 'absolute',
-                                left: vh * 0.040,
-                                // marginVertical: 30,
-                                flexDirection: 'row',
-                                marginTop: 60,
-                            }} >
-                                <TouchableOpacity style={{}}>
-                                    <Image source={require('../assets/menu.png')} style={{
-                                        height: 12,
-                                        width: 22,
-                                    }} />
-                                </TouchableOpacity>
-                                <Text style={{
-                                    color: '#000',
-                                    fontSize: 16,
-                                    fontWeight: '700',
-                                    marginLeft: vw * 0.09,
+                            {Platform.OS === 'android' ?
+                                <View style={{
                                     position: 'absolute',
-                                    bottom: -5
-                                }}>
-                                    Notification
-                                </Text>
-                            </View>
+                                    left: vh * 0.040,
+                                    marginVertical: 30,
+                                    flexDirection: 'row',
+                                    
+                                }} >
+                                    <TouchableOpacity style={{}}>
+                                        <Image source={require('../assets/menu.png')} style={{
+                                            height: 12,
+                                            width: 22,
+                                        }} />
+                                    </TouchableOpacity>
+                                    <Text style={{
+                                        color: '#000',
+                                        fontSize: 16,
+                                        fontWeight: '700',
+                                        marginLeft: vw * 0.09,
+                                        position: 'absolute',
+                                        bottom: -5
+                                    }}>
+                                        Notification
+                                    </Text>
+                                </View>
+                                : <View style={{
+                                    position: 'absolute',
+                                    left: vh * 0.040,
+                                    // marginVertical: 30,
+                                    flexDirection: 'row',
+                                    marginTop: 60,
+                                }} >
+                                    <TouchableOpacity style={{}}>
+                                        <Image source={require('../assets/menu.png')} style={{
+                                            height: 12,
+                                            width: 22,
+                                        }} />
+                                    </TouchableOpacity>
+                                    <Text style={{
+                                        color: '#000',
+                                        fontSize: 16,
+                                        fontWeight: '700',
+                                        marginLeft: vw * 0.09,
+                                        position: 'absolute',
+                                        bottom: -5
+                                    }}>
+                                        Notification
+                                    </Text>
+                                </View>}
+
                             <View style={{ marginTop: vh * 0.085, marginVertical: vh * 0.020 }}>
                                 <Text style={{ color: '#000', fontWeight: 'bold', fontSize: 20, position: 'relative', right: vw * 0.37 }}>
                                     Today
