@@ -2,9 +2,9 @@ import { View, ImageBackground, Image, Text } from 'react-native';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { vw, vh } from '../constant'
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableHighlight } from 'react-native-gesture-handler';
 
-export default function GusetProfileMessage() {
+export default function GusetProfileMessage(props) {
     return (
         <SafeAreaView style={{ flex: 1, alignItems: "center", backgroundColor: '#fff' }}>
             <ImageBackground source={require('../assets/userSignup.png')} resizeMode='cover' style={{ alignItems: "center", width: "100%", height: vh, }}>
@@ -21,9 +21,9 @@ export default function GusetProfileMessage() {
                     </View>
 
                     <View style={{ marginBottom: vh * 0.01 }}>
-                        <TouchableOpacity style={{ width: vh * 0.44, height: 45, borderRadius: 20, backgroundColor: "#333" }}>
+                        <TouchableHighlight onPress={()=>{props.navigation.navigate('SignupDetails')}} style={{ width: vh * 0.44, height: 45, borderRadius: 20, backgroundColor: "#333" }}>
                             <Text style={{ color: "white", textAlign: 'center', paddingVertical: 12, fontWeight: "bold" }}>SIGNUP</Text>
-                        </TouchableOpacity>
+                        </TouchableHighlight>
                     </View>
 
                 </View>

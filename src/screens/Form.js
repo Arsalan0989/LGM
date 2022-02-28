@@ -1,5 +1,5 @@
-import React, { useEffect,useState } from 'react'
-import { View, ScrollView, SafeAreaView, StyleSheet,ActivityIndicator, Keyboard, TouchableOpacity, KeyboardAvoidingView, TouchableWithoutFeedback, ImageBackground, Image, Text } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { View, ScrollView, SafeAreaView, StyleSheet, ActivityIndicator, Keyboard, TouchableOpacity, KeyboardAvoidingView, TouchableWithoutFeedback, ImageBackground, Image, Text } from 'react-native'
 import { vw, vh } from '../constant';
 import { TextInput } from 'react-native-paper';
 import axios from 'axios';
@@ -50,16 +50,16 @@ export default function Form(props) {
                             "Cookie": "ci_session=2c33c56a0c53ea95f57b3ed3e827d128efe88050"
                         }
                     };
-                    axios.post("https://hitsofficialuae.com/lgm/api/home/sendinquiry" ,postData, axiosConfig).then(resp => {
+                    axios.post("https://hitsofficialuae.com/lgm/api/home/sendinquiry", postData, axiosConfig).then(resp => {
                         setUserId(value => (userDetails.customer_id))
-                        console.log(userDetails.customer_id,'iddddddddddddddd')
+                        console.log(userDetails.customer_id, 'iddddddddddddddd')
                         console.log(resp, "RESPONSEEEEE");
                         if (resp.status == "200") {
                             setname("")
                             setmobile("")
                             setmessage("")
                             alert(resp.data.data)
-                               setLoader(false)
+                            setLoader(false)
 
                         } else {
                             alert(resp.data.data)
@@ -92,13 +92,13 @@ export default function Form(props) {
         }
         else {
             return (
-                  <View style={{ marginVertical: 10, alignItems: 'center' }}>
-                <TouchableOpacity onPress={() => { support() }} style={{ borderRadius: 20, backgroundColor: "#333", }}>
-                    <Text style={{ color: "white", paddingHorizontal: vw * 0.35, paddingVertical: 12, fontWeight: "bold" }}>
-                        SEND
-                    </Text>
-                </TouchableOpacity>
-            </View>
+                <View style={{ marginVertical: 10, alignItems: 'center' }}>
+                    <TouchableOpacity onPress={() => { support() }} style={{ borderRadius: 20, backgroundColor: "#333", }}>
+                        <Text style={{ color: "white", paddingHorizontal: vw * 0.35, paddingVertical: 12, fontWeight: "bold" }}>
+                            SEND
+                        </Text>
+                    </TouchableOpacity>
+                </View>
             )
         }
     }
@@ -113,20 +113,20 @@ export default function Form(props) {
 
                 <ScrollView>
                     <SafeAreaView style={{ flex: 1, alignItems: "center", backgroundColor: '#fff' }}>
-                    <View style={{ flexDirection: 'row', marginRight: vw * 0.6, padding: 10,marginVertical:5 }}>
-                    <TouchableOpacity onPress={()=>{props.navigation.navigate('BlogScreen')}} >
-                        <Image source={require('../assets/back.png')} style={{ height: 17, width: 27, marginRight: 15, padding: 0, }} />
-                    </TouchableOpacity>
-                    <Text style={{ color: '#000', fontWeight: 'bold', fontSize: 16 }}>
-                        Support
-                    </Text>
+                        <View style={{ flexDirection: 'row', marginRight: vw * 0.6, padding: 10, marginVertical: 5 }}>
+                            <TouchableOpacity onPress={() => { props.navigation.navigate('BlogScreen') }} >
+                                <Image source={require('../assets/back.png')} style={{ height: 17, width: 27, marginRight: 15, padding: 0, }} />
+                            </TouchableOpacity>
+                            <Text style={{ color: '#000', fontWeight: 'bold', fontSize: 16 }}>
+                                Support
+                            </Text>
 
-                </View>
+                        </View>
 
                         <ImageBackground source={require('../assets/userSignup.png')} resizeMode='cover' style={{ alignItems: "center", width: "100%", height: vh, }}>
                             {/* checking */}
 
-                            <Image source={require('../assets/data1.png')} reesizeMode='cover' style={{ marginVertical: vh * 0.03, height: 125, width: "90%", }} />
+                            <Image source={require('../assets/data2.png')} reesizeMode='cover' style={{ marginVertical: vh * 0.03, height: 125, width: "90%", }} />
 
 
 
