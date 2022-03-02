@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { View, StatusBar, SafeAreaView, TouchableHighlight, ActivityIndicator,TextInput, StyleSheet, FlatList, TouchableOpacity, ImageBackground, Dimensions, Image, Text } from 'react-native'
+import { View, StatusBar, SafeAreaView, TouchableHighlight, ActivityIndicator, TextInput, StyleSheet, FlatList, TouchableOpacity, ImageBackground, Dimensions, Image, Text } from 'react-native'
 import { vw, vh } from '../constant';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
 import SliderBox from 'react-native-image-slider';
 import messaging from '@react-native-firebase/messaging';
-import Modal from "react-native-modal";
 import Carousel, { Pagination } from 'react-native-snap-carousel';
-
+import Modal from "react-native-modal";
 async function requestUserPermission() {
     const authorizationStatus = await messaging().requestPermission();
 
@@ -37,10 +36,8 @@ export default function HomeScreen(props) {
     const [title, settitle] = useState([
         "lgmcdsdsadfghgfdffdfddadsadsad"
     ]);
-    const [isModalVisible, setModalVisible] = useState(false);
-    const toggleModal = () => {
-        setModalVisible(!isModalVisible);
-    };
+
+    const [isModalVisible, setModalVisible] = useState(true);
     const [loaderr, setLoader] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [blogData, setBlogData] = useState([])
@@ -58,7 +55,10 @@ export default function HomeScreen(props) {
         }
     });
 
-
+    const toggleModal = () => {
+        setModalVisible(!isModalVisible);
+    };
+    
     const getStatus = () => {
         AsyncStorage.getItem('user', (err, userDetails) => {
             if (userDetails) {
@@ -227,16 +227,16 @@ export default function HomeScreen(props) {
     const renderButton = () => {
         if (loaderr) {
             return (
-                <View style={{ justifyContent: 'center', alignItems: 'center', marginVertical: 10 }}>
+                <View style={{ justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
                     <ActivityIndicator color="black" size="small" />
                 </View>
             )
         }
         else {
             return (
-                <View style={{ justifyContent: 'center', alignItems: 'center', marginVertical: 10 }}>
-                    <TouchableHighlight onPress={() => { update() }} style={{ width: vh * 0.4, borderRadius: 20, backgroundColor: "#333" }}>
-                        <Text style={{ color: "white", textAlign: 'center', paddingVertical: 12, fontWeight: "bold" }} >WAITING FOR YOUR RESPONSE </Text>
+                <View style={{ marginHorizontal:vw*0.11, marginVertical: 20 }}>
+                    <TouchableHighlight onPress={() => { props.navigation.navigate('DocTalk') }} style={{ width: vh * 0.28, borderRadius: 20, backgroundColor: "#333" }}>
+                        <Text style={{ color: "white", textAlign: 'center', paddingVertical: 12, fontWeight: "bold" }} >CONTACT DOCTOR </Text>
                     </TouchableHighlight >
                 </View>
             )
@@ -250,11 +250,7 @@ export default function HomeScreen(props) {
                 <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-end', alignSelf: 'flex-end', paddingRight: vh * 0.1, marginBottom: vh * 0.12 }}>
                     <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 35 }}>{item.title}</Text>
                     <Text style={{ color: '#fff', fontSize: 16 }}> {item.subtitle}</Text>
-                    {/* <View style={{ marginTop: 10 }}>
-                        <TouchableOpacity style={{ width: vh * 0.17, borderRadius: 20, backgroundColor: "#D1A82A", }}>
-                            <Text style={{ color: "white", textAlign: 'center', paddingVertical: 5, fontWeight: '300', }}>{item.button_title}</Text>
-                        </TouchableOpacity>
-                    </View> */}
+
                 </View>
             </ImageBackground>
         );
@@ -284,158 +280,165 @@ export default function HomeScreen(props) {
             />
         );
     }
-   
+
     {
-        return isLoading ? <View style={{flex:1,justifyContent:'center'}}>
+        return isLoading ? <View style={{ flex: 1, justifyContent: 'center' }}>
             <ActivityIndicator color="black" size="large" />
-            </View>
-             : (
-        <SafeAreaView style={{ flex: 1, alignItems: "center", backgroundColor: '#fff' }}>
-            <ImageBackground source={require('../assets/userSignup.png')} resizeMode='cover' style={{ alignItems: "center", width: "100%", height: vh, }}>
-                <View style={{ height: vh * 0.38, width: '100%' }} >
-
-                    <View style={{ flex: 1, position: 'absolute', top: vh * 0.03, left: vw * 0.03, elevation: 2, zIndex: 5, flexDirection: 'row' }}>
-                        <TouchableOpacity onPress={() => { roleId === "0" ? props.navigation.navigate("GusetProfileMessage") : props.navigation.navigate("profile") }} style={{ backgroundColor: '#fff', width: vw * 0.10, height: vh * 0.05, borderRadius: 20 }}>
-                            <Image source={require('../assets/menu.png')} style={{ height: 17, width: 17, padding: 7, marginLeft: vw * 0.024, marginTop: 7 }} />
-                        </TouchableOpacity>
-                        <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 17, marginLeft: 10, marginTop: 6, }}>
-                            Home
-                        </Text>
-
-                    </View>
-                    <View>
-                        <Carousel
-                            autoplay={true}
-                            autoplayDelay={1000}
-                            autoplayInterval={3000}
-                            enableMomentum={false}
-                            lockScrollWhileSnapping={true}
-                            enableSnap={false}
-                            loop={true}
-                            data={sliders}
-                            renderItem={_renderItem}
-                            sliderWidth={windowWidth}
-                            itemWidth={windowWidth}
-                        />
-                        {pagination}
-                    </View>
-
-                </View>
+        </View>
+            : (
+                <SafeAreaView style={{ flex: 1, alignItems: "center", backgroundColor: '#fff' }}>
+                    <ImageBackground source={require('../assets/userSignup.png')} resizeMode='cover' style={{ alignItems: "center", width: "100%", height: vh, }}>
 
 
 
+                        <View style={{ height: vh * 0.38, width: '100%' }} >
 
-
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginVertical: 25, backgroundColor: "white", elevation: 10, borderRadius: 15, padding: 15 }}>
-                    <View style={{ marginHorizontal: vw * 0.04, alignItems: "center" }}>
-                        <TouchableOpacity onPress={() => { roleId === "0" ? props.navigation.navigate("NeedDoctor") : checkCondition() }} style={{ height: 30, width: 30, alignItems: 'center', borderRadius: 20, backgroundColor: '#D1A82A', position: "absolute", top: vh * -0.05 }}>
-                            <Image source={require("../assets/fdoc.png")} style={{ height: 12, width: 12, backgroundColor: '#D1A82A', alignItems: 'center', marginTop: 8, }} />
-                        </TouchableOpacity>
-                        <Text> Find a Doctor</Text>
-                    </View>
-                    <Text style={{ fontWeight: "bold", fontSize: 18, color: "#f1f1f1" }}> | </Text>
-                    <View style={{ marginHorizontal: vw * 0.04, alignItems: "center" }}>
-                        <TouchableOpacity onPress={() => { roleId === "0" ? props.navigation.navigate("GusetProfileMessage") : props.navigation.navigate("preseption") }} style={{ height: 30, width: 30, alignItems: 'center', borderRadius: 20, backgroundColor: '#D1A82A', position: "absolute", top: vh * -0.05 }}>
-                            <Image source={require("../assets/pre.png")} style={{ height: 12, width: 12, backgroundColor: '#D1A82A', alignItems: 'center', marginTop: 8 }} />
-                        </TouchableOpacity>
-                        <Text> Your Prescriptions</Text>
-                    </View>
-                </View>
-
-
-
-                <View style={{ flexDirection: "row", position: 'relative', top: -7 }}>
-
-
-                    <Text style={{ color: '#000', fontWeight: 'bold', fontSize: 18, marginHorizontal: vw * 0.28 }}>
-                        Latest News
-                    </Text>
-
-                    <TouchableOpacity onPress={() => (props.navigation.navigate("Blogs"))} style={{ marginHorizontal: vw * 0.28 }}>
-                        <Text>See all</Text>
-                    </TouchableOpacity>
-
-                </View>
-                <View >
-
-                    <FlatList
-                        horizontal={true}
-                        showsVerticalScrollIndicator={false}
-                        data={blogData}
-                        keyExtractor={item => item.news_id}
-                        renderItem={({ item }) => (
-
-                            <View style={{ flex: 1, marginLeft: 10 }}>
-                                <View style={{ borderRadius: 26, margin: 5, padding: 10, backgroundColor: '#F5F5F5', alignItems: 'center', height: vh * 0.33, width: "100%" }}>
-                                    <TouchableOpacity onPress={() => (props.navigation.replace("BlogScreen", { news_id: item.news_id }))}>
-                                        <Image source={{ "uri": item.news_image }} style={{ borderRadius: 20, alignItems: 'center', height: vh * 0.2, width: vw * 0.55 }} />
-                                    </TouchableOpacity>
-                                    {/* {item.news_title} */}
-                                    <View style={{ flex: 1, marginBottom: 10, marginRight: 35, padding: 5 }}>
-                                        <Text style={{ color: '#2D240E', fontWeight: 'bold', width: vw * 0.4 }} numberOfLines={2}>{item.news_title}</Text>
-                                        <Text style={{ margin: 2, color: '#A2A2A2', fontSize: 10, }}>{item.messageTime}</Text>
-                                        <Text style={{ color: '#A2A2A2', fontSize: 10 }}> {item.username}</Text>
-
-                                    </View>
-                                </View>
-                            </View>
-
-
-
-                        )}
-                    />
-
-
-                    <Modal isVisible={isModalVisible}>
-                        <View style={{ backgroundColor: '#fff', borderWidth: 2, borderColor: '#F9FAFA', borderRadius: 22 }}>
-                            <View style={{ marginLeft: vw * 0.04, padding: 5, flexDirection: 'row' }}>
-                                <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#2D240E', fontFamily: 'Railway' }}>
-                                    Issue Submitted Wait for {"\n"} Doctor's Response
-                                </Text>
-                                <TouchableOpacity onPress={(toggleModal)} style={{ position: 'absolute', right: 1, marginRight: 10 }}>
-                                    <Image source={require('./../assets/close2.png')} style={{ height: 20, width: 15, }} />
+                            <View style={{ flex: 1, position: 'absolute', top: vh * 0.03, left: vw * 0.03, elevation: 2, zIndex: 5, flexDirection: 'row' }}>
+                                <TouchableOpacity onPress={() => { roleId === "0" ? props.navigation.navigate("GusetProfileMessage") : props.navigation.navigate("profile") }} style={{ backgroundColor: '#fff', width: vw * 0.10, height: vh * 0.05, borderRadius: 20 }}>
+                                    <Image source={require('../assets/menu.png')} style={{ height: 17, width: 17, padding: 7, marginLeft: vw * 0.024, marginTop: 7 }} />
                                 </TouchableOpacity>
-                            </View>
+                                <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 17, marginLeft: 10, marginTop: 6, }}>
+                                    Home
+                                </Text>
 
-                            <View style={{}}>
-                                <UselessTextInput
-                                    editable={false}
-                                    multiline
-                                    numberOfLines={4}
-                                    placeholder='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-                                    style={{
-                                        height: vh * 0.15,
-                                        borderRadius: 22,
-                                        margin: 12,
-                                        borderColor: '#A2A2A2',
-                                        borderWidth: 2,
-                                        padding: 10,
-                                        width: vw * 0.83,
-                                        fontSize: 15,
-                                        backgroundColor: '#fff'
-                                    }}
+                            </View>
+                            <View>
+                                <Carousel
+                                    autoplay={true}
+                                    autoplayDelay={1000}
+                                    autoplayInterval={3000}
+                                    enableMomentum={false}
+                                    lockScrollWhileSnapping={true}
+                                    enableSnap={false}
+                                    loop={true}
+                                    data={sliders}
+                                    renderItem={_renderItem}
+                                    sliderWidth={windowWidth}
+                                    itemWidth={windowWidth}
                                 />
-
-
+                                {pagination}
                             </View>
-                            {renderButton()}
-
-
 
                         </View>
-                    </Modal>
-                </View>
-
-
-            </ImageBackground>
-
-
-        </SafeAreaView>
 
 
 
-    );
-                                }
+
+
+                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginVertical: 25, backgroundColor: "white", elevation: 10, borderRadius: 15, padding: 15 }}>
+                            <View style={{ marginHorizontal: vw * 0.04, alignItems: "center" }}>
+                                <TouchableOpacity onPress={() => { roleId === "0" ? props.navigation.navigate("NeedDoctor") : checkCondition() }} style={{ height: 30, width: 30, alignItems: 'center', borderRadius: 20, backgroundColor: '#D1A82A', position: "absolute", top: vh * -0.05 }}>
+                                    <Image source={require("../assets/fdoc.png")} style={{ height: 12, width: 12, backgroundColor: '#D1A82A', alignItems: 'center', marginTop: 8, }} />
+                                </TouchableOpacity>
+                                <Text> Find a Doctor</Text>
+                            </View>
+                            <Text style={{ fontWeight: "bold", fontSize: 18, color: "#f1f1f1" }}> | </Text>
+                            <View style={{ marginHorizontal: vw * 0.04, alignItems: "center" }}>
+                                <TouchableOpacity onPress={() => { roleId === "0" ? props.navigation.navigate("GusetProfileMessage") : props.navigation.navigate("preseption") }} style={{ height: 30, width: 30, alignItems: 'center', borderRadius: 20, backgroundColor: '#D1A82A', position: "absolute", top: vh * -0.05 }}>
+                                    <Image source={require("../assets/pre.png")} style={{ height: 12, width: 12, backgroundColor: '#D1A82A', alignItems: 'center', marginTop: 8 }} />
+                                </TouchableOpacity>
+                                <Text> Your Prescriptions</Text>
+                            </View>
+                        </View>
+
+
+
+                        <View style={{ flexDirection: "row", position: 'relative', top: -7 }}>
+
+
+                            <Text style={{ color: '#000', fontWeight: 'bold', fontSize: 18, marginHorizontal: vw * 0.28 }}>
+                                Latest News
+                            </Text>
+
+                            <TouchableOpacity onPress={() => (props.navigation.navigate("Blogs"))} style={{ marginHorizontal: vw * 0.28 }}>
+                                <Text>See all</Text>
+                            </TouchableOpacity>
+
+                        </View>
+                        <View >
+
+                            <FlatList
+                                horizontal={true}
+                                showsVerticalScrollIndicator={false}
+                                data={blogData}
+                                keyExtractor={item => item.news_id}
+                                renderItem={({ item }) => (
+
+                                    <View style={{ flex: 1, marginLeft: 10 }}>
+                                        <View style={{ borderRadius: 26, margin: 5, padding: 10, backgroundColor: '#F5F5F5', alignItems: 'center', height: vh * 0.33, width: "100%" }}>
+                                            <TouchableOpacity onPress={() => (props.navigation.replace("BlogScreen", { news_id: item.news_id }))}>
+                                                <Image source={{ "uri": item.news_image }} style={{ borderRadius: 20, alignItems: 'center', height: vh * 0.2, width: vw * 0.55 }} />
+                                            </TouchableOpacity>
+                                            {/* {item.news_title} */}
+                                            <View style={{ flex: 1, marginBottom: 10, marginRight: 35, padding: 5 }}>
+                                                <Text style={{ color: '#2D240E', fontWeight: 'bold', width: vw * 0.4 }} numberOfLines={2}>{item.news_title}</Text>
+                                                <Text style={{ margin: 2, color: '#A2A2A2', fontSize: 10, }}>{item.messageTime}</Text>
+                                                <Text style={{ color: '#A2A2A2', fontSize: 10 }}> {item.username}</Text>
+
+                                            </View>
+                                        </View>
+                                    </View>
+
+
+
+                                )}
+                            />
+
+
+                            <Modal isVisible={isModalVisible}>
+                                <View style={{ backgroundColor: '#AE8929', borderWidth: 2, borderColor: '#AE8929', borderRadius: 22 }}>
+
+
+                                    <TouchableOpacity onPress={ (toggleModal)} style={{ position: 'absolute', right: 1, marginRight: 10, marginVertical: 9 }}>
+                                        <Image source={require('./../assets/close22.png')} style={{ height: 12, width: 15, }} />
+                                    </TouchableOpacity>
+                                    <View style={{ justifyContent: 'center',  alignItems: 'center', marginVertical: 20,marginTop:vh*0.06 }}>
+                                        <Text style={{ marginRight:12,fontSize: 30, fontWeight: 'bold', color: '#2D240E', fontFamily: 'Railway' }}>
+                                            Welcome to LGM
+                                        </Text>
+                                        <Text style={{ marginRight:vw*0.09,fontSize: 20, fontWeight: 'bold', color: '#2D240E', fontFamily: 'Railway' }}>
+                                            Are You Worried About
+                                        </Text>
+                                    </View>
+                                    <View style={{marginHorizontal:vw*0.15  }}>
+                                        <View style={{ flexDirection: 'row',  }}>
+                                            <Image source={require('../assets/point.png')} style={{ height: 10, width: 10 ,marginTop:3}} />
+                                            <Text style={{fontStyle: 'italic',color:'#2D240E'}}> Gambling Addiction</Text>
+
+                                        </View>
+                                        <View style={{ flexDirection: 'row',  }}>
+                                            <Image source={require('../assets/point.png')} style={{ height: 10, width: 10, marginTop:3}} />
+                                            <Text style={{fontStyle: 'italic',color:'#2D240E'}}> Depression</Text>
+                                        </View>
+                                        <View style={{ flexDirection: 'row',  }}>
+                                            <Image source={require('../assets/point.png')} style={{ height: 10, width: 10, marginTop:3 }} />
+                                            <Text style={{fontStyle: 'italic',color:'#2D240E'}}> Debts Due to Gambling</Text>
+                                        </View>
+                                        <View style={{ flexDirection: 'row',  }}>
+                                            <Image source={require('../assets/point.png')} style={{ height: 10, width: 10, marginTop:3 }} />
+                                            <Text style={{fontStyle: 'italic',color:'#2D240E'}}> Hopelessness</Text>
+                                        </View>
+                                    </View>
+
+
+                                    {renderButton()}
+
+
+
+                                </View>
+                            </Modal>
+                        </View>
+
+
+                    </ImageBackground>
+
+
+                </SafeAreaView>
+
+
+
+            );
+    }
 }
 
 const styles = StyleSheet.create({

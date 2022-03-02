@@ -165,7 +165,7 @@ const adminChat = ({ navigation, route }) => {
     return (<View style={{ flexDirection: 'row' }}>
       <TouchableOpacity onPress={() => navigation.replace("myTab")} style={{ padding: 20, backgroundColor: "#EAE9E6", flexDirection: 'column', justifyContent: 'space-around' }}>
         <Image source={require('../assets/back.png')} style={{ height: 10, width: 16, padding: 2, resizeMode: 'contain' }} />
-        <Text style={{fontSize:10,}}>Back</Text>
+        <Text style={{ fontSize: 10, }}>Back</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={selectFile} style={{ padding: 20, backgroundColor: "#EAE9E6", flexDirection: 'row', justifyContent: 'space-around' }}>
         <Image source={require('../assets/presep.png')} style={{ height: 10, width: 10, padding: 0, resizeMode: 'contain' }} />

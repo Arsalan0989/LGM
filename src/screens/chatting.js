@@ -158,7 +158,7 @@ const ChatScreen = ({ navigation, route }) => {
     return (<View style={{ flexDirection: 'row' }}>
       <TouchableOpacity onPress={() => navigation.goBack()} style={{ padding: 20, backgroundColor: "#EAE9E6", flexDirection: 'column', justifyContent: 'space-around' }}>
         <Image source={require('../assets/back.png')} style={{ height: 10, width: 16, padding: 2, resizeMode: 'contain' }} />
-        <Text style={{fontSize:10,}}>Back</Text>
+        <Text style={{ fontSize: 10, }}>Back</Text>
 
       </TouchableOpacity>
       <TouchableOpacity onPress={selectFile} style={{ padding: 20, backgroundColor: "#EAE9E6", flexDirection: 'row', justifyContent: 'space-around' }}>
