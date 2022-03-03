@@ -19,7 +19,7 @@ export default function profile(props) {
     const [mobile, setmobile] = useState('')
     const [location, setlocation] = useState('Location of dummy * address')
     const [fullname, setfullname] = useState('')
-    const [profileimage, setprofileimage] = useState(require('../assets/profile1.2.png'))
+    const [profileimage, setprofileimage] = useState('')
 
     const toggleModal = () => {
         setModalVisible(!isModalVisible);

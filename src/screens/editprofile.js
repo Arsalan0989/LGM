@@ -14,7 +14,7 @@ export default function editprofile(props) {
     const [Email, setemail] = React.useState('');
     const [mobile, setmobile] = React.useState('');
     const [Location, setlocation] = React.useState('');
-    const [profileimage, setprofileimage] = useState(require('../assets/profile1.2.png'))
+    const [profileimage, setprofileimage] = useState('');
     const [loaderr, setLoader] = useState(false)
     const [filePath, setFilePath] = useState("");
     const [access_token, setAccessToken] = useState('');

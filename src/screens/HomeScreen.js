@@ -58,7 +58,7 @@ export default function HomeScreen(props) {
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
     };
-    
+
     const getStatus = () => {
         AsyncStorage.getItem('user', (err, userDetails) => {
             if (userDetails) {
@@ -234,7 +234,7 @@ export default function HomeScreen(props) {
         }
         else {
             return (
-                <View style={{ marginHorizontal:vw*0.11, marginVertical: 20 }}>
+                <View style={{ marginHorizontal: vw * 0.11, marginVertical: 20 }}>
                     <TouchableHighlight onPress={() => { props.navigation.navigate('DocTalk') }} style={{ width: vh * 0.28, borderRadius: 20, backgroundColor: "#333" }}>
                         <Text style={{ color: "white", textAlign: 'center', paddingVertical: 12, fontWeight: "bold" }} >CONTACT DOCTOR </Text>
                     </TouchableHighlight >
@@ -389,34 +389,34 @@ export default function HomeScreen(props) {
                                 <View style={{ backgroundColor: '#AE8929', borderWidth: 2, borderColor: '#AE8929', borderRadius: 22 }}>
 
 
-                                    <TouchableOpacity onPress={ (toggleModal)} style={{ position: 'absolute', right: 1, marginRight: 10, marginVertical: 9 }}>
+                                    <TouchableOpacity onPress={(toggleModal)} style={{ position: 'absolute', right: 1, marginRight: 10, marginVertical: 9 }}>
                                         <Image source={require('./../assets/close22.png')} style={{ height: 12, width: 15, }} />
                                     </TouchableOpacity>
-                                    <View style={{ justifyContent: 'center',  alignItems: 'center', marginVertical: 20,marginTop:vh*0.06 }}>
-                                        <Text style={{ marginRight:12,fontSize: 30, fontWeight: 'bold', color: '#2D240E', fontFamily: 'Railway' }}>
+                                    <View style={{ justifyContent: 'center', alignItems: 'center', marginVertical: 20, marginTop: vh * 0.06 }}>
+                                        <Text style={{ marginRight: 12, fontSize: 30, fontWeight: 'bold', color: '#2D240E', fontFamily: 'Railway' }}>
                                             Welcome to LGM
                                         </Text>
-                                        <Text style={{ marginRight:vw*0.09,fontSize: 20, fontWeight: 'bold', color: '#2D240E', fontFamily: 'Railway' }}>
+                                        <Text style={{ marginRight: vw * 0.09, fontSize: 20, fontWeight: 'bold', color: '#2D240E', fontFamily: 'Railway' }}>
                                             Are You Worried About
                                         </Text>
                                     </View>
-                                    <View style={{marginHorizontal:vw*0.15  }}>
-                                        <View style={{ flexDirection: 'row',  }}>
-                                            <Image source={require('../assets/point.png')} style={{ height: 10, width: 10 ,marginTop:3}} />
-                                            <Text style={{fontStyle: 'italic',color:'#2D240E'}}> Gambling Addiction</Text>
+                                    <View style={{ marginHorizontal: vw * 0.15 }}>
+                                        <View style={{ flexDirection: 'row', }}>
+                                            <Image source={require('../assets/point.png')} style={{ height: 10, width: 10, marginTop: 3 }} />
+                                            <Text style={{ fontStyle: 'italic', color: '#2D240E' }}> Gambling Addiction</Text>
 
                                         </View>
-                                        <View style={{ flexDirection: 'row',  }}>
-                                            <Image source={require('../assets/point.png')} style={{ height: 10, width: 10, marginTop:3}} />
-                                            <Text style={{fontStyle: 'italic',color:'#2D240E'}}> Depression</Text>
+                                        <View style={{ flexDirection: 'row', }}>
+                                            <Image source={require('../assets/point.png')} style={{ height: 10, width: 10, marginTop: 3 }} />
+                                            <Text style={{ fontStyle: 'italic', color: '#2D240E' }}> Depression</Text>
                                         </View>
-                                        <View style={{ flexDirection: 'row',  }}>
-                                            <Image source={require('../assets/point.png')} style={{ height: 10, width: 10, marginTop:3 }} />
-                                            <Text style={{fontStyle: 'italic',color:'#2D240E'}}> Debts Due to Gambling</Text>
+                                        <View style={{ flexDirection: 'row', }}>
+                                            <Image source={require('../assets/point.png')} style={{ height: 10, width: 10, marginTop: 3 }} />
+                                            <Text style={{ fontStyle: 'italic', color: '#2D240E' }}> Debts Due to Gambling</Text>
                                         </View>
-                                        <View style={{ flexDirection: 'row',  }}>
-                                            <Image source={require('../assets/point.png')} style={{ height: 10, width: 10, marginTop:3 }} />
-                                            <Text style={{fontStyle: 'italic',color:'#2D240E'}}> Hopelessness</Text>
+                                        <View style={{ flexDirection: 'row', }}>
+                                            <Image source={require('../assets/point.png')} style={{ height: 10, width: 10, marginTop: 3 }} />
+                                            <Text style={{ fontStyle: 'italic', color: '#2D240E' }}> Hopelessness</Text>
                                         </View>
                                     </View>
 
