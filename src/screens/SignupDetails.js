@@ -26,6 +26,7 @@ export default function SignupDetails(props) {
 
                     <TouchableOpacity onPress={() => {
                         AsyncStorage.setItem("role_id", '0')
+                        AsyncStorage.setItem("modal_box", '0')
                         props.navigation.navigate("myTab")
                     }} style={{ marginVertical: 10 }} >
                         <Text style={{ fontWeight: "bold", color: '#000', fontFamily: 'Railway' }}>CONTINUE AS A GUEST</Text>

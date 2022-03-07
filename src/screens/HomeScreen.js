@@ -44,11 +44,13 @@ export default function HomeScreen(props) {
     const [chatId, setChatId] = useState()
     const [querySuccess, setquerySuccess] = useState([])
     const [roleId, setroleId] = useState([])
+    const [modalBox, setModelId] = useState([])
     const [userId, setUserId] = useState('')
     const [doctortalk, setDoctorTalk] = useState("");
     const [access_token, setAccess_Token] = useState([])
     const [sliders, setSliders] = useState([])
     const [activeSlide, setactiveSlide] = useState(0)
+    
     AsyncStorage.getItem('role_id', (err, roleId) => {
         if (roleId) {
             setroleId(roleId);
@@ -56,7 +58,25 @@ export default function HomeScreen(props) {
     });
 
     const toggleModal = () => {
-        setModalVisible(!isModalVisible);
+        
+        AsyncStorage.getItem('modal_box', (err, modalBox) => {
+     
+            if (modalBox === "1") {
+               // getUserData();
+               setModalVisible(!isModalVisible);
+               console.log(modalBox);
+               //setModalVisible(!isModalVisible);
+               
+              console.log('ahsan')
+            } else {
+                setModalVisible(isModalVisible);
+                AsyncStorage.setItem("modal_box", "1");
+               // setModelId("1");
+                console.log("roleIdjkdfkjahssaan");
+            }
+
+        })
+        
     };
 
     const getStatus = () => {
@@ -182,11 +202,12 @@ export default function HomeScreen(props) {
 
     }
 
-    const getUserQueryStatus = () => setInterval(getStatus, 5000);
+    const getUserQueryStatus = () => setInterval(getStatus, 1000000);
 
     useEffect(() => {
         requestUserPermission()
         getUserQueryStatus();
+        toggleModal();
         AsyncStorage.getItem('role_id', (err, roleId) => {
             if (roleId !== "0") {
                 getUserData();

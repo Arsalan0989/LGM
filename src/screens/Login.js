@@ -34,6 +34,7 @@ export default function Login(props) {
                             AsyncStorage.setItem("is_loggedin", '1')
                             console.log("fdsfsdfsdgsdf==========", res.data.role_id);
                             AsyncStorage.setItem("role_id", res.data.role_id)
+                            AsyncStorage.setItem("modal_box", "0")
                             AsyncStorage.setItem("user", JSON.stringify(res.data))
                             setEmail("")
                             setpassword("")
@@ -127,7 +128,7 @@ export default function Login(props) {
                     <TextInput
                         mode="outlined"
                         label="Password"
-                        placeholder="Password"
+                        // placeholder="Password"
                         borderColor="false"
                         theme={{ roundness: 30, colors: { primary: '#A2A2A2', underlineColor: 'transparent', } }}
                         style={{

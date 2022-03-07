@@ -79,8 +79,8 @@ export default function UserSignup(props) {
             <Text style={{ fontWeight: "bold", color: '#000' }}>Sign Up!</Text>
             <Text style={{ fontWeight: "bold", color: '#000', fontSize: 24, marginBottom: 25 }}>It's easier to sign up now</Text>
 
-            <TouchableOpacity onPress={() => { props.navigation.navigate("faq") }} style={{ borderRadius: 20, paddingHorizontal: 10, borderWidth: 1, backgroundColor: "#1877F2" }}>
-              <Text style={{ color: "white", paddingHorizontal: 70, paddingVertical: 12, fontWeight: "bold" }}>CONTINUE WITH FACEBOOK</Text>
+            <TouchableOpacity onPress={_signIn} style={{ borderRadius: 20, paddingHorizontal: 10, borderWidth: 0, backgroundColor: "#DB4437" }}>
+              <Text style={{ color: "white", paddingHorizontal: 70, paddingVertical: 12, fontWeight: "bold" }}>CONTINUE WITH GOOGLE</Text>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => { props.navigation.navigate("SignupScreen") }} style={{ borderColor: '#A2A2A2', paddingHorizontal: 12, borderWidth: 1, borderRadius: 20, backgroundColor: "white", marginVertical: 10 }}>
@@ -90,9 +90,9 @@ export default function UserSignup(props) {
               {/* <TouchableOpacity>
                             <Image source={require('../assets/twitter.png')} style={{ height: 50, width: 50 }} />
                         </TouchableOpacity> */}
-              <TouchableOpacity onPress={_signIn}>
+              {/* <TouchableOpacity onPress={_signIn}>
                 <Image source={require('../assets/google-plus.png')} style={{ height: 50, width: 50 }} />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
               {/* <TouchableOpacity>
                             <Image source={require('../assets/linkedin.png')} style={{ height: 50, width: 50 }} />
                         </TouchableOpacity> */}

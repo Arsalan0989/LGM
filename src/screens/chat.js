@@ -144,7 +144,7 @@ export default function chat(props) {
                                 data={online}
                                 keyExtractor={item => item.user_id}
                                 renderItem={({ item }) => (
-                                    <View style={{ height: '18%', marginTop: vh * 0.06, marginVertical: 30, alignSelf: 'flex-start' }}>
+                                    <View style={{ flex: 1,height: '18%', marginTop: vh * 0.06, marginVertical: 30, alignSelf: 'flex-start' }}>
                                         <View style={{ margin: 2, padding: 5, }}>
                                             <ImageBackground imageStyle={{ borderRadius: 30 }} source={{ "uri": item.profile_pic }} style={{ height: 60, width: 60, }}>
                                                 <View style={{ position: 'absolute', right: 1, bottom: 4, }}>
@@ -152,7 +152,7 @@ export default function chat(props) {
                                                 </View>
                                             </ImageBackground>
                                             <View style={{ alignItems: 'center', marginVertical: 8 }}>
-                                                <Text style={{ fontSize: 14, fontWeight: '500', color: '#000' }}>
+                                                <Text style={{textAlign:'center',fontSize: 14, fontWeight: '500', color: '#000' }}>
                                                     {item.name}
                                                 </Text>
                                             </View>

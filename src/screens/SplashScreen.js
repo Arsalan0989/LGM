@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import messaging from '@react-native-firebase/messaging';
-import { SafeAreaView, StyleSheet, Button, ImageBackground, Image, View, Text } from 'react-native'
+import { SafeAreaView, StyleSheet, Button,Platform, ImageBackground, Image, View, Text } from 'react-native'
 import { vw, vh } from '../constant';
 import { WebView } from 'react-native-webview';
 import AsyncStorage from '@react-native-community/async-storage';
 import { notifications, NotificationMessage, Android } from 'react-native-firebase-push-notifications'
-
+import LottieView from 'lottie-react-native';
 
 export default function SplashScreen(props) {
   useEffect(() => {
@@ -71,14 +71,35 @@ export default function SplashScreen(props) {
   }, [])
 
   return (
-    <View>
+    <View style={{backgroundColor:'#BC922E'}}>
+      {Platform.OS === "ios" ? 
+      
+      <View >
       <Image
-        style={{
-          width: '100%',
-          height: '100%',
-        }}
-        source={require('../assets/background.gif')}
-      />
+      style={{
+        width: '100%',
+        height: '100%',
+      }}
+      source={require('../assets/background.gif')}
+    />
+       
+
+      </View>
+    
+      : 
+      <View >
+      <Image
+      style={{
+        width: '100%',
+        height: '100%',
+      }}
+      source={require('../assets/background.gif')}
+    />
+        <LottieView source={require("../assets/98467-lgm-logo.json")} autoPlay loop />
+
+      </View>
+      }
+ 
     </View>
   )
 
