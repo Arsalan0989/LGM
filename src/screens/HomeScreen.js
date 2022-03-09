@@ -202,7 +202,7 @@ export default function HomeScreen(props) {
 
     }
 
-    const getUserQueryStatus = () => setInterval(getStatus, 1000000);
+    const getUserQueryStatus = () => setInterval(getStatus, 5000);
 
     useEffect(() => {
         requestUserPermission()
@@ -235,6 +235,7 @@ export default function HomeScreen(props) {
     }, [])
 
     const checkCondition = () => {
+        console.log(doctortalk)
         if (doctortalk == "modal") {
             setModalVisible(true)
         }
@@ -256,7 +257,7 @@ export default function HomeScreen(props) {
         else {
             return (
                 <View style={{ marginHorizontal: vw * 0.11, marginVertical: 20 }}>
-                    <TouchableHighlight onPress={() => { props.navigation.navigate('DocTalk') }} style={{ width: vh * 0.28, borderRadius: 20, backgroundColor: "#333" }}>
+                    <TouchableHighlight onPress={() => { roleId === "0" ? props.navigation.navigate("NeedDoctor") : checkCondition() }} style={{ width: vh * 0.28, borderRadius: 20, backgroundColor: "#333" }}>
                         <Text style={{ color: "white", textAlign: 'center', paddingVertical: 12, fontWeight: "bold" }} >CONTACT DOCTOR </Text>
                     </TouchableHighlight >
                 </View>

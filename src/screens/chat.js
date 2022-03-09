@@ -16,6 +16,8 @@ export default function chat(props) {
         // {"news_id":item.user_id}
     }
 
+    
+
     const test = () => {
         let userDetails = {};
         try {
@@ -78,11 +80,8 @@ export default function chat(props) {
             <ActivityIndicator color="black" size="large" />
         </View>
             : (
-                <KeyboardAvoidingView
-                    behavior={Platform.OS === "ios" ? "padding" : "height"}
-                    style={{ flex: 1 }}
-                >
-                    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                
+                    
                         <SafeAreaView style={{ flex: 1, alignItems: "center", backgroundColor: '#fff' }}>
                             {Platform.OS === 'android' ?
                                 <View style={{
@@ -139,6 +138,7 @@ export default function chat(props) {
 
                             <FlatList
                                 showsHorizontalScrollIndicator={false}
+                                nestedScrollEnabled 
                                 horizontal={true}
                                 showsVerticalScrollIndicator={false}
                                 data={online}
@@ -198,9 +198,8 @@ export default function chat(props) {
                             />
 
                         </SafeAreaView>
-                    </TouchableWithoutFeedback>
 
-                </KeyboardAvoidingView>
+       
             );
     }
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, ScrollView, Text, Button, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, ScrollView, Text, Button, StyleSheet,Keyboard, TouchableOpacity, Image } from 'react-native';
 import { Bubble, GiftedChat, Send } from 'react-native-gifted-chat';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -88,6 +88,7 @@ const ChatScreen = ({ navigation, route }) => {
   }, []);
 
   const sendImageMessage = (messages) => {
+    Keyboard.dismiss()
     const headers = {
       'Authorization': access_token,
       'Content-Type': 'application/json'
@@ -105,6 +106,7 @@ const ChatScreen = ({ navigation, route }) => {
       }
     })
       .then(function (response) {
+        
         setSingleFile("");
         console.log(JSON.stringify(response.data));
       })
@@ -168,6 +170,7 @@ const ChatScreen = ({ navigation, route }) => {
     </View>)
   }
   return (
+    
     <GiftedChat
       text={msg}
       messages={messages}
@@ -186,6 +189,7 @@ const ChatScreen = ({ navigation, route }) => {
       scrollToBottom
       scrollToBottomComponent={scrollToBottomComponent}
     />
+    
   );
 };
 

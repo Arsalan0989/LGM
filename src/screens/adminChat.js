@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, ScrollView, Text, Button, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, ScrollView, Text, Button, StyleSheet,Keyboard, TouchableOpacity, Image } from 'react-native';
 import { Bubble, GiftedChat, Send } from 'react-native-gifted-chat';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -96,6 +96,7 @@ const adminChat = ({ navigation, route }) => {
   }, []);
 
   const sendImageMessage = (messages) => {
+    Keyboard.dismiss()
     const headers = {
       'Authorization': access_token,
       'Content-Type': 'application/json'
