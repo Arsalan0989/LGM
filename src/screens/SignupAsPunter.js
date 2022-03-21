@@ -4,6 +4,7 @@ import { vw, vh } from '../constant'
 import { TextInput } from 'react-native-paper';
 import axios from 'axios';
 import AsyncStorage from  '@react-native-community/async-storage';
+import { axiosClient } from './client';
 
 export default function SignupAsPunter(props) {
     const [BName, setBName] = React.useState('');
@@ -45,7 +46,7 @@ export default function SignupAsPunter(props) {
                         phonenumber: mobileno,
                         deviceToken: device_token
                     }
-                    axios.post("https://hitsofficialuae.com/lgm/api/user/punter", postData).then(res => {
+                    axiosClient.post("user/punter", postData).then(res => {
                         console.log(res.data, "RESPONSEEEEE");
                         if (res.data.success) {
                             try {
@@ -290,7 +291,7 @@ export default function SignupAsPunter(props) {
 
                                 />
                                 <View style={{ marginRight: vh * 0.10 }}>
-                                    <Text >I accept the policy and terms</Text>
+                                    <Text style={{color:'#000'}}>I accept the policy and terms</Text>
                                 </View>
 
                             </View>

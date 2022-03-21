@@ -4,6 +4,7 @@ import { View, Text, ImageBackground, StyleSheet, TouchableWithoutFeedback, Keyb
 import { vw, vh } from '../constant';
 import { TextInput } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
+import { axiosClient } from './client';
 
 export default function SignupScreen(props) {
     const [fullName, setFullName] = React.useState('');
@@ -45,7 +46,7 @@ export default function SignupScreen(props) {
                         deviceToken: device_token
                     }
 
-                    axios.post("https://hitsofficialuae.com/lgm/api/user/index", postData).then(res => {
+                    axiosClient.post("user/index", postData).then(res => {
                         console.log(res, "RESPONSEEEEE");
                         if (res.data.success) {
                             setFullName("")
@@ -229,7 +230,7 @@ export default function SignupScreen(props) {
                                         onValueChange={toggleSwitch}
                                         value={isEnabled}
                                     />
-                                    <Text style={{ marginRight: vh * 0.15, fontFamily: 'Railway' }}>I accept the policy and terms</Text>
+                                    <Text style={{color:'#000', marginRight: vh * 0.15, fontFamily: 'Railway' }}>I accept the policy and terms</Text>
 
                                 </View>
 

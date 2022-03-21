@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
 import RNFetchBlob from 'rn-fetch-blob';
 import { set } from 'react-native-reanimated';
+import { axiosClient } from './client';
 
 
 export default function preseption(props) {
@@ -34,7 +35,7 @@ export default function preseption(props) {
                         }
                     };
 
-                    axios.get("https://hitsofficialuae.com/lgm/api/home/precriptions?user_id=" + userDetails.customer_id, axiosConfig).then(res => {
+                    axiosClient.get("home/precriptions?user_id=" + userDetails.customer_id, axiosConfig).then(res => {
                         setIsLoading(false);
 
                         let tempArr = []
@@ -77,7 +78,7 @@ export default function preseption(props) {
                         }
                     };
 
-                    axios.get("https://hitsofficialuae.com/lgm/api/home/deleteprescription?prescription_id=" + del_id, axiosConfig).then(res => {
+                    axiosClient.get("home/deleteprescription?prescription_id=" + del_id, axiosConfig).then(res => {
                         console.log("RESPOMSEEEEEE check ", res.data);
 
 
@@ -226,7 +227,7 @@ export default function preseption(props) {
                                 return (
                                     <View style={{ borderTopColor: '#ebebeb', borderTopWidth: 1, borderLeftWidth: 5, borderColor: '#D1A82A', height: vh * 0.12, width: vw * 0.92, borderRadius: 10, backgroundColor: '#fff', elevation: 10, marginVertical: 10 }}>
                                         <View style={{ flexDirection: 'row', marginHorizontal: 5, marginVertical: 5 }}>
-                                            <Text>
+                                            <Text style={{color:'#A2A2A2'}}>
                                                 {item.time}
                                             </Text>
                                             <TouchableOpacity onPress={() => Delete(item?.prescription_id)} style={{ position: 'absolute', right: 0 }} >
@@ -234,7 +235,7 @@ export default function preseption(props) {
                                             </TouchableOpacity>
                                         </View>
                                         <View style={{ marginHorizontal: 13 }}>
-                                            <Text>{item.title}
+                                            <Text  style={{color:'#A2A2A2'}}>{item.title}
 
                                             </Text>
                                         </View>
@@ -243,7 +244,7 @@ export default function preseption(props) {
                                                 console.log(img)
                                                 return (<TouchableOpacity onPress={() => checkPermission(img)} style={{ height: 22, width: 80, backgroundColor: "#EAE9E6", borderRadius: 2, marginRight: 5, flexDirection: 'row', justifyContent: 'space-around' }}>
                                                     <Image source={require('../assets/presep.png')} style={{ height: 10, width: 10, marginTop: 5 }} />
-                                                    <Text >image.png</Text>
+                                                    <Text  style={{color:'#A2A2A2'}}>image.png</Text>
                                                 </TouchableOpacity>)
                                             })
 

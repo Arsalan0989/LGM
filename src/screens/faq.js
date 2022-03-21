@@ -6,6 +6,8 @@ import { vw, vh } from '../constant';
 import { TextInput, List } from 'react-native-paper';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
+import { axiosClient } from './client';
+
 export default function faq(props) {
    
     const [expanded, setExpanded] = React.useState(true);
@@ -36,7 +38,7 @@ export default function faq(props) {
                             "Cookie": "ci_session=2c33c56a0c53ea95f57b3ed3e827d128efe88050"
                         }
                     };
-                    axios.get("https://hitsofficialuae.com/lgm/api/home/faq?user_id=" + userDetails.customer_id, axiosConfig).then(res => {
+                    axiosClient.get("home/faq?user_id=" + userDetails.customer_id, axiosConfig).then(res => {
                         console.log("RESPOMSEEEEEE of heading and title", res.data.data.faq_terms);
                         console.log("RESPOMSEEEEEE of faq", res.data.data.faq);
 
@@ -159,7 +161,7 @@ export default function faq(props) {
                                             />
                                         )} />}>
 
-                                        <Text style={{ marginHorizontal: 10, marginVertical: 10, fontSize: 15 }}>
+                                        <Text style={{ color:'#A2A2A2',marginHorizontal: 10, marginVertical: 10, fontSize: 15 }}>
                                             {item.description}
                                         </Text>
 

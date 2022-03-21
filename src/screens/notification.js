@@ -6,6 +6,7 @@ import { vw, vh } from '../constant';
 import Swipeout from 'react-native-swipeout';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
+import { axiosClient } from './client';
 
 export default function notification(props) {
     const [todaydata, settodaydata] = useState([]);
@@ -37,7 +38,7 @@ export default function notification(props) {
                         }
                     };
 
-                    axios.get("https://hitsofficialuae.com/lgm/api/home/notifications?user_id=" + userDetails.customer_id, axiosConfig).then(res => {
+                    axiosClient.get("home/notifications?user_id=" + userDetails.customer_id, axiosConfig).then(res => {
                         console.log("RESPOMSEEEEEE check ", res.data.data);
                         console.log('====================================');
                         console.log(userDetails.customer_id);
@@ -98,7 +99,7 @@ export default function notification(props) {
                         }
                     };
 
-                    axios.get("https://hitsofficialuae.com/lgm/api/home/deletenotification?notifiction_id=" + del_id, axiosConfig).then(res => {
+                    axiosClient.get("home/deletenotification?notifiction_id=" + del_id, axiosConfig).then(res => {
                         console.log("RESPOMSEEEEEE check ", res.data);
 
 
@@ -224,10 +225,10 @@ export default function notification(props) {
                                                         {item.name}
                                                     </Text>
                                                     <View style={{ flex: 1, flexDirection: "row", alignItems: "center", justifyContent: 'space-around' }}>
-                                                        <Text style={{ fontSize: 12, width: "70%", marginLeft: 8 }}>
+                                                        <Text style={{ fontSize: 12, width: "70%", marginLeft: 8 ,color:'#A2A2A2'}}>
                                                             {item.message}
                                                         </Text>
-                                                        <Text style={{ fontSize: 12, marginLeft: 20, justifyContent: 'space-around', }}>
+                                                        <Text style={{ fontSize: 12, marginLeft: 20, justifyContent: 'space-around', color:'#A2A2A2'}}>
                                                             {item.created_on}
                                                         </Text>
                                                     </View>
@@ -268,10 +269,10 @@ export default function notification(props) {
                                                             {item.name}
                                                         </Text>
                                                         <View style={{ flex: 1, flexDirection: "row", alignItems: "center", justifyContent: 'space-around' }}>
-                                                            <Text style={{ fontSize: 12, width: "70%", marginLeft: 7 }}>
+                                                            <Text style={{ fontSize: 12, width: "70%", marginLeft: 7 ,color:'#A2A2A2'}}>
                                                                 {item.message}
                                                             </Text>
-                                                            <Text style={{ fontSize: 12, marginLeft: 20, justifyContent: 'space-around', }}>
+                                                            <Text style={{ fontSize: 12, marginLeft: 20, justifyContent: 'space-around', color:'#A2A2A2'}}>
                                                                 {item.created_on}
                                                             </Text>
                                                         </View>

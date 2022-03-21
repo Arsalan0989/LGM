@@ -10,13 +10,14 @@ import {
     useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
 import axios from 'axios';
+import { axiosClient } from './client';
 const styles = StyleSheet.create({
 
     // root: {flex: 1, padding: 20},
     // title: {textAlign: 'center', fontSize: 30},
     codeFieldRoot: { marginTop: 50 },
     cell: {
-
+        color: '#000',
         width: 45,
         height: 45,
         lineHeight: 44,
@@ -64,13 +65,13 @@ export default function VerifyIdentify(props) {
             userEmail: email,
             verificationCode: value,
         }
-        axios.post("https://hitsofficialuae.com/lgm/api/user/verifyEmail", postData).then(res => {
+        axiosClient.post("user/verifyEmail", postData).then(res => {
             console.log(res.data, "RESPONSEEEEE");
 
             if (res.data.verificationStatus) {
-              AsyncStorage.setItem("is_loggedin",'1')
-                AsyncStorage.setItem("role_id",res.data.role_id)
-                AsyncStorage.setItem("user",JSON.stringify(res.data))
+                AsyncStorage.setItem("is_loggedin", '1')
+                AsyncStorage.setItem("role_id", res.data.role_id)
+                AsyncStorage.setItem("user", JSON.stringify(res.data))
                 props.navigation.replace("myTab")
                 setLoader(false)
 
@@ -115,8 +116,8 @@ export default function VerifyIdentify(props) {
                 </Text>
 
             </View>
-            <View style={{ marginLeft: vw * 0.15 }}>
-                <Text >Please check your email and enter the Code.</Text>
+            <View style={{ marginLeft: vw * 0.15, }}>
+                <Text style={{ color: '#000' }} >Please check your email and enter the Code.</Text>
             </View>
 
 
@@ -146,6 +147,7 @@ export default function VerifyIdentify(props) {
                     )}
                 />
             </View>
+
 
             {renderButton()}
         </SafeAreaView>

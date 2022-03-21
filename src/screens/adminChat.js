@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, ScrollView, Text, Button, StyleSheet,Keyboard, TouchableOpacity, Image } from 'react-native';
-import { Bubble, GiftedChat, Send } from 'react-native-gifted-chat';
+import { Bubble, GiftedChat, Send,InputToolbar  } from 'react-native-gifted-chat';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { LogBox } from "react-native";
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 import * as ImagePicker from 'react-native-image-picker';
-
+import { axiosClient } from './client';
 LogBox.ignoreLogs(["EventEmitter.removeListener"]);
 const adminChat = ({ navigation, route }) => {
   const [messages, setMessages] = useState([]);
@@ -36,14 +36,14 @@ const adminChat = ({ navigation, route }) => {
         var config = {
           method: 'get',
           //  url: 'https://hitsofficialuae.com/lgm/api/chat/chatmessages?language=en&user_id=1&receiver_id=119',
-          url: 'https://hitsofficialuae.com/lgm/api/drtalk/messages?language=en&chat_id=' + route?.params?.chat_id + '&user_id=' + userDetails.customer_id,
+          url: 'drtalk/messages?language=en&chat_id=' + route?.params?.chat_id + '&user_id=' + userDetails.customer_id,
           headers: {
             "Authorization": "Bearer " + userDetails.access_token,
             'Cookie': 'ci_session=3e8489f45df807f9b8944d156dc52dc1a8d03f9b; csrf_cookie_name=3c027a6c3f04bb0f4eb485deed5c54a9'
           }
         };
         console.log(config)
-        axios(config)
+        axiosClient(config)
           .then(function (response) {
             if (response.data.success)
               setMessages(response.data.data)
@@ -107,7 +107,7 @@ const adminChat = ({ navigation, route }) => {
     }
     console.log(singleFile == "")
     const testData = { 'sender_id': sender_id, 'chat_id': route?.params?.chat_id, 'message': msg, 'postchat': 1, 'type': type, 'photo': singleFile }
-    axios.post('https://hitsofficialuae.com/lgm/api/drtalk/newChat', testData, {
+    axiosClient.post('drtalk/newChat', testData, {
       headers: {
         'Authorization': access_token,
         'Content-Type': 'application/json'
@@ -156,6 +156,10 @@ const adminChat = ({ navigation, route }) => {
       />
     );
   };
+  const renderInputToolbar =(props)=> {
+    //Add the extra styles via containerStyle
+   return <InputToolbar {...props} textInputStyle={{ color: "#000" }}/>
+ }
 
   const scrollToBottomComponent = () => {
     return (
@@ -166,7 +170,7 @@ const adminChat = ({ navigation, route }) => {
     return (<View style={{ flexDirection: 'row' }}>
       <TouchableOpacity onPress={() => navigation.replace("myTab")} style={{ padding: 20, backgroundColor: "#EAE9E6", flexDirection: 'column', justifyContent: 'space-around' }}>
         <Image source={require('../assets/back.png')} style={{ height: 10, width: 16, padding: 2, resizeMode: 'contain' }} />
-        <Text style={{ fontSize: 10, }}>Back</Text>
+        <Text style={{ fontSize: 10, color:'#000'}}>Back</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={selectFile} style={{ padding: 20, backgroundColor: "#EAE9E6", flexDirection: 'row', justifyContent: 'space-around' }}>
         <Image source={require('../assets/presep.png')} style={{ height: 10, width: 10, padding: 0, resizeMode: 'contain' }} />
@@ -192,6 +196,7 @@ const adminChat = ({ navigation, route }) => {
       infiniteScroll={true}
       scrollToBottom={true}
       scrollToBottomComponent={scrollToBottomComponent}
+      renderInputToolbar={renderInputToolbar} 
     />
   );
 };

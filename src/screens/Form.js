@@ -4,7 +4,7 @@ import { vw, vh } from '../constant';
 import { TextInput } from 'react-native-paper';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
-
+import { axiosClient } from './client';
 
 const UselessTextInput = (props) => {
     return (
@@ -50,7 +50,7 @@ export default function Form(props) {
                             "Cookie": "ci_session=2c33c56a0c53ea95f57b3ed3e827d128efe88050"
                         }
                     };
-                    axios.post("https://hitsofficialuae.com/lgm/api/home/sendinquiry", postData, axiosConfig).then(resp => {
+                    axiosClient.post("home/sendinquiry", postData, axiosConfig).then(resp => {
                         setUserId(value => (userDetails.customer_id))
                         console.log(userDetails.customer_id, 'iddddddddddddddd')
                         console.log(resp, "RESPONSEEEEE");

@@ -4,6 +4,7 @@ import { vw, vh } from '../constant'
 import axios from 'axios';
 import { TextInput } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
+import { axiosClient } from './client';
 
 export default function Login(props) {
     const [Email, setEmail] = React.useState('');
@@ -28,7 +29,7 @@ export default function Login(props) {
                 }
                 console.log(postData);
 
-                axios.post("https://hitsofficialuae.com/lgm/api/auth/login", postData).then(res => {
+                axiosClient.post("auth/login", postData).then(res => {
                     if (res.data.error == "") {
                         try {
                             AsyncStorage.setItem("is_loggedin", '1')
@@ -160,9 +161,9 @@ export default function Login(props) {
                         onValueChange={toggleSwitch}
                         value={isEnabled}
                     />
-                    <Text style={{ marginRight: 60, fontFamily: 'Railway' }}> Remember me</Text>
+                    <Text style={{ marginRight: 60, fontFamily: 'Railway',color:'#000' }}> Remember me</Text>
                     <TouchableOpacity onPress={() => { props.navigation.navigate("ContWithEmail") }}>
-                        <Text style={{ fontFamily: 'Railway' }}>
+                        <Text style={{ fontFamily: 'Railway',color:'#000' }}>
                             Forgot password?
                         </Text>
                     </TouchableOpacity>

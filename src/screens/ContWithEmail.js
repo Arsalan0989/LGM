@@ -4,7 +4,7 @@ import { View, ScrollView, SafeAreaView, StyleSheet, Keyboard, ActivityIndicator
 import { vw, vh } from '../constant';
 import axios from 'axios';
 import { TextInput } from 'react-native-paper';
-
+import { axiosClient } from './client';
 
 
 
@@ -23,7 +23,7 @@ export default function ContWithEmail(props) {
 
             email: email,
         }
-        axios.post("https://hitsofficialuae.com/lgm/api/auth/resetPwd", postData).then(res => {
+        axiosClient.post("auth/resetPwd", postData).then(res => {
             console.log(res, "RESPONSEEEEE");
             if (res.data.message == "") {
                 setemail("")
