@@ -12,6 +12,9 @@ target 'LGM' do
     :hermes_enabled => false
   )
 
+  # permissions_path = '../node_modules/react-native-permissions/ios'
+
+  # pod 'Permission-PhotoLibrary', :path => "#{permissions_path}/PhotoLibrary"
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { View, StatusBar, SafeAreaView, ActivityIndicator, FlatList, TouchableOpacity, ImageBackground, PermissionsAndroid, Image, Platform, Text } from 'react-native'
+import { Linking, View, StatusBar, SafeAreaView, ActivityIndicator, FlatList, TouchableOpacity, ImageBackground, PermissionsAndroid, Image, Platform, Text, Alert } from 'react-native'
+import CameraRoll from "@react-native-community/cameraroll";
+
 import { Item } from 'react-native-paper/lib/typescript/components/List/List';
 import { vw, vh } from '../constant';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
 import RNFetchBlob from 'rn-fetch-blob';
 import { set } from 'react-native-reanimated';
-
 
 export default function preseption(props) {
     const [blogData, setBlogData] = useState([])
@@ -103,8 +104,6 @@ export default function preseption(props) {
 
     }
 
-
-
     const checkPermission = async (url) => {
 
         // Function to check the platform
@@ -139,42 +138,71 @@ export default function preseption(props) {
     };
 
     const downloadImage = (url) => {
-        // Main function to download the image
+        if (Platform.OS === 'android') {
+            // Main function to download the image
 
-        // To add the time suffix in filename
-        let date = new Date();
-        // Image URL which we want to download
-        let image_URL = url;
-        // Getting the extention of the file
-        let ext = getExtention(image_URL);
-        ext = '.' + ext[0];
-        // Get config and fs from RNFetchBlob
-        // config: To pass the downloading related options
-        // fs: Directory path where we want our image to download
-        const { config, fs } = RNFetchBlob;
-        let PictureDir = fs.dirs.PictureDir;
-        let options = {
-            fileCache: true,
-            addAndroidDownloads: {
-                // Related to the Android only
-                useDownloadManager: true,
-                notification: true,
-                path:
-                    PictureDir +
-                    '/image_' +
-                    Math.floor(date.getTime() + date.getSeconds() / 2) +
-                    ext,
-                description: 'Image',
-            },
-        };
-        config(options)
-            .fetch('GET', image_URL)
-            .then(res => {
-                // Showing alert after successful downloading
-                console.log('res -> ', JSON.stringify(res));
-                alert('Image Downloaded Successfully.');
-            });
+            // To add the time suffix in filename
+            let date = new Date();
+            // Image URL which we want to download
+            let image_URL = url;
+            // Getting the extention of the file
+            let ext = getExtention(image_URL);
+            ext = '.' + ext[0];
+            // Get config and fs from RNFetchBlob
+            // config: To pass the downloading related options
+            // fs: Directory path where we want our image to download
+            // const { config, fs } = RNFetchBlob;
+            // let PictureDir = Platform.OS === 'ios' ? fs.dirs.DocumentDir : fs.dirs.PictureDir;
+
+            const { config, fs } = RNFetchBlob;
+            let PictureDir = Platform.OS === 'ios' ? fs.dirs.DocumentDir : fs.dirs.PictureDir;
+            let options = {
+                fileCache: true,
+                addAndroidDownloads: {
+                    // Related to the Android only
+                    useDownloadManager: true,
+                    notification: true,
+                    path:
+                        PictureDir +
+                        '/image_' +
+                        Math.floor(date.getTime() + date.getSeconds() / 2) +
+                        ext,
+                    description: 'Image',
+                },
+            };
+            config(options)
+                .fetch('GET', image_URL)
+                .then(res => {
+                    // Showing alert after successful downloading
+                    console.log('res -> ', JSON.stringify(res));
+                    alert('Image Downloaded Successfully.');
+                });
+        } else {
+            // console.log('hello world');
+            // checkiOSPermission()
+            setIsLoading(true)
+            CameraRoll.save(url)
+                .then(res => {
+                    setIsLoading(false)
+                    alert('Prescription downloaded successfully in you photos, please check photos app in your phone.')
+                })
+                .catch(err => gotoSettings())
+
+        }
+
     };
+
+    const gotoSettings = () => {
+        setIsLoading(false)
+        Alert.alert(
+            "Permission denied",
+            "Goto settings and give access to photo library.",
+            [
+
+                { text: "OK", onPress: () => Linking.openSettings() }
+            ]
+        );
+    }
 
     const getExtention = filename => {
         // To get the file extension
