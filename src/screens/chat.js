@@ -5,6 +5,7 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { vw, vh } from '../constant'
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
+import { axiosClient } from './client';
 
 export default function chat(props) {
     const [blogData, setBlogData] = useState([])
@@ -35,7 +36,7 @@ export default function chat(props) {
                     };
                     console.log(userDetails.customer_id);
 
-                    axios.get("https://hitsofficialuae.com/lgm/api/chat/conversations?language=en&user_id=" + userDetails.customer_id, axiosConfig).then(res => {
+                    axiosClient.get("chat/conversations?language=en&user_id=" + userDetails.customer_id, axiosConfig).then(res => {
                         console.log("RESPOMSEEEEEE check ", res.data);
                         setIsLoading(false);
 
@@ -180,13 +181,13 @@ export default function chat(props) {
                                                         {item.name}
                                                     </Text>
                                                     <View style={{ flexDirection: "row", alignItems: "center", }}>
-                                                        <Text style={{ fontSize: 12 }}>
+                                                        <Text style={{ fontSize: 12 ,color:'#A2A2A2'}}>
                                                             {item.message}
                                                         </Text>
                                                         <Text>
                                                             {"  .  "}
                                                         </Text>
-                                                        <Text style={{ fontSize: 12 }}>
+                                                        <Text style={{ fontSize: 12,color:'#A2A2A2' }}>
                                                             {item.date}
                                                         </Text>
                                                     </View>

@@ -6,7 +6,7 @@ import { CheckBox, Icon } from 'react-native-elements';
 import Modal from "react-native-modal";
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
-
+import { axiosClient } from './client';
 const UselessTextInput = (props) => {
     return (
         <TextInput
@@ -107,7 +107,7 @@ export default function DocTalk(props) {
                             message: message,
 
                         }
-                        axios.post("https://hitsofficialuae.com/lgm/api/home/dcotalk", postData, axiosConfig).then(res => {
+                        axiosClient.post("home/dcotalk", postData, axiosConfig).then(res => {
                             console.log(userDetails.customer_id, 'iddddddddddddddd')
                             console.log(res, "RESPONSEEEEE");
                             setLoader(false)
@@ -228,6 +228,7 @@ export default function DocTalk(props) {
                                 numberOfLines={4}
                                 placeholder='Please explain your problem in detail.'
                                 style={{
+                                    color:'#000',
                                     height: vh * 0.15,
                                     borderRadius: 22,
                                     margin: 12,
@@ -294,6 +295,7 @@ export default function DocTalk(props) {
                                         <Text
                                             numberOfLines={4}
                                             style={{
+                                                color:'#000',
                                                 height: vh * 0.15,
                                                 borderRadius: 22,
                                                 margin: 12,

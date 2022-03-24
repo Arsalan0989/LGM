@@ -6,6 +6,7 @@ import { vw, vh } from '../constant'
 import axios from 'axios';
 import Modal from "react-native-modal";
 import AsyncStorage from '@react-native-community/async-storage';
+import { axiosClient } from './client';
 
 export default function profile(props) {
     const [password, setpassword] = React.useState('');
@@ -43,7 +44,7 @@ export default function profile(props) {
                             "Cookie": "ci_session=2c33c56a0c53ea95f57b3ed3e827d128efe88050"
                         }
                     };
-                    axios.get("https://hitsofficialuae.com/lgm/api/profile/getUserallProfileData?user_id=" + userDetails.customer_id, axiosConfig).then(res => {
+                    axiosClient.get("profile/getUserallProfileData?user_id=" + userDetails.customer_id, axiosConfig).then(res => {
                         console.log("RESPOMSEEEEEE", res.data.data.user_details);
                         console.log("userrrrr iddd", userDetails.role_id);
                         setIsLoading(false)
@@ -99,7 +100,7 @@ export default function profile(props) {
 
                 }
 
-                axios.post("https://hitsofficialuae.com/lgm/api/auth/updatePwd", postData).then(res => {
+                axiosClient.post("auth/updatePwd", postData).then(res => {
                     console.log(res, "RESPONSEEEEE");
                     if (res.data.pwdResetStatus == 'true') {
 
@@ -328,6 +329,7 @@ export default function profile(props) {
                             <View style={{}}>
                                 <TextInput
                                     style={{
+                                        color: '#000',
                                         height: 40,
                                         borderRadius: 20,
                                         margin: 12,
@@ -342,6 +344,7 @@ export default function profile(props) {
                                     maxLength={16}
                                     value={password}
                                     placeholder=" New Password"
+                                    placeholderTextColor='#A2A2A2'
                                     secureTextEntry={true}
                                 />
                                 <View style={{ marginLeft: vw * 0.04, marginBottom: 10 }}>
@@ -349,6 +352,7 @@ export default function profile(props) {
                                 </View>
                                 <TextInput
                                     style={{
+                                        color: '#000',
                                         height: 40,
                                         borderRadius: 20,
                                         margin: 12,
@@ -363,6 +367,7 @@ export default function profile(props) {
                                     maxLength={16}
                                     value={cpassword}
                                     placeholder="Confirm your password"
+                                    placeholderTextColor='#A2A2A2'
                                     secureTextEntry={true}
                                 />
                                 <View style={{ marginLeft: vw * 0.05, marginBottom: 10 }}>

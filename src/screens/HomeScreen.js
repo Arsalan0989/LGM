@@ -7,6 +7,8 @@ import SliderBox from 'react-native-image-slider';
 import messaging from '@react-native-firebase/messaging';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import Modal from "react-native-modal";
+import { axiosClient } from './client';
+
 async function requestUserPermission() {
     const authorizationStatus = await messaging().requestPermission();
 
@@ -89,13 +91,13 @@ export default function HomeScreen(props) {
 
                 var config = {
                     method: 'get',
-                    url: 'https://hitsofficialuae.com/lgm/api/home/checkquery?user_id=' + data.customer_id,
+                    url: 'home/checkquery?user_id=' + data.customer_id,
                     headers: {
                         'Authorization': 'Bearer ' + data.access_token,
                         'Cookie': 'ci_session=3bb13c91d04b4e077bb882b85af5e240cbd39722; csrf_cookie_name=be6b670e882fef0378ace87a5043e304'
                     }
                 };
-                axios(config)
+                axiosClient(config)
                     .then(function (response) {
                         console.log(JSON.stringify(response.data));
                         if (response.data.success) {
@@ -140,7 +142,7 @@ export default function HomeScreen(props) {
                             "Cookie": "ci_session=2c33c56a0c53ea95f57b3ed3e827d128efe88050"
                         }
                     };
-                    axios.get("https://hitsofficialuae.com/lgm/api/home/getHomeData?user_id=" + userDetails.customer_id, axiosConfig).then(res => {
+                    axiosClient.get("home/getHomeData?user_id=" + userDetails.customer_id, axiosConfig).then(res => {
                         console.log("RESPOMSEEEEEE", res.data.data.news);
                         setIsLoading(false);
 
@@ -176,7 +178,7 @@ export default function HomeScreen(props) {
                 }
             };
             //https://hitsofficialuae.com/lgm/api/guest/getHomeData
-            axios.get("https://hitsofficialuae.com/lgm/api/guest/getHomeData", axiosConfig).then(res => {
+            axiosClient.get("guest/getHomeData", axiosConfig).then(res => {
                 console.log("RESPOMSEEEEEE", res.data.data.news);
                 setIsLoading(false);
 
@@ -352,14 +354,14 @@ export default function HomeScreen(props) {
                                 <TouchableOpacity onPress={() => { roleId === "0" ? props.navigation.navigate("NeedDoctor") : checkCondition() }} style={{ height: 30, width: 30, alignItems: 'center', borderRadius: 20, backgroundColor: '#D1A82A', position: "absolute", top: vh * -0.05 }}>
                                     <Image source={require("../assets/fdoc.png")} style={{ height: 12, width: 12, backgroundColor: '#D1A82A', alignItems: 'center', marginTop: 8, }} />
                                 </TouchableOpacity>
-                                <Text> Find a Doctor</Text>
+                                <Text style={{color:'#000'}}> Find a Doctor</Text>
                             </View>
                             <Text style={{ fontWeight: "bold", fontSize: 18, color: "#f1f1f1" }}> | </Text>
                             <View style={{ marginHorizontal: vw * 0.04, alignItems: "center" }}>
                                 <TouchableOpacity onPress={() => { roleId === "0" ? props.navigation.navigate("GusetProfileMessage") : props.navigation.navigate("preseption") }} style={{ height: 30, width: 30, alignItems: 'center', borderRadius: 20, backgroundColor: '#D1A82A', position: "absolute", top: vh * -0.05 }}>
                                     <Image source={require("../assets/pre.png")} style={{ height: 12, width: 12, backgroundColor: '#D1A82A', alignItems: 'center', marginTop: 8 }} />
                                 </TouchableOpacity>
-                                <Text> Your Prescriptions</Text>
+                                <Text style={{color:'#000'}}> Your Prescriptions</Text>
                             </View>
                         </View>
 
@@ -373,7 +375,7 @@ export default function HomeScreen(props) {
                             </Text>
 
                             <TouchableOpacity onPress={() => (props.navigation.navigate("Blogs"))} style={{ marginHorizontal: vw * 0.28 }}>
-                                <Text>See all</Text>
+                                <Text style={{color:'#000'}}>See all</Text>
                             </TouchableOpacity>
 
                         </View>

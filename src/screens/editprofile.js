@@ -6,6 +6,7 @@ import { vw, vh } from '../constant';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 import * as ImagePicker from "react-native-image-picker";
+import { axiosClient } from './client';
 
 export default function editprofile(props) {
     const [userId, setUserId] = React.useState('');
@@ -100,7 +101,7 @@ export default function editprofile(props) {
                             }
                         };
 
-                        axios.post("https://hitsofficialuae.com/lgm/api/profile/editUserProfile", postData, axiosConfig).then(res => {
+                        axiosClient.post("profile/editUserProfile", postData, axiosConfig).then(res => {
                             console.log(res.data, "RESPONSEEEEE");
                             if (res.status == "200") {
                                 // setemail("")
@@ -153,7 +154,7 @@ export default function editprofile(props) {
                             "Cookie": "ci_session=2c33c56a0c53ea95f57b3ed3e827d128efe88050"
                         }
                     };
-                    axios.get("https://hitsofficialuae.com/lgm/api/profile/getUserallProfileData?user_id=" + userDetails.customer_id, axiosConfig).then(res => {
+                    axiosClient.get("profile/getUserallProfileData?user_id=" + userDetails.customer_id, axiosConfig).then(res => {
                         setIsLoading(false)
                         setUserId(value => (userDetails.customer_id))
                         setAccessToken("Bearer " + userDetails.access_token);
@@ -253,7 +254,9 @@ export default function editprofile(props) {
                         </Text>
                         <TextInput
                             placeholder='alicejack@gmail.com'
+                            placeholderTextColor="#000" 
                             style={{
+                                color:'#000',
                                 height: 40,
                                 borderRadius: 20,
                                 margin: 12,
@@ -273,6 +276,7 @@ export default function editprofile(props) {
                         <TextInput
                             placeholder='+1 000 000 0000'
                             style={{
+                                color:'#000',
                                 height: 40,
                                 borderRadius: 20,
                                 margin: 12,
@@ -295,6 +299,7 @@ export default function editprofile(props) {
                         <TextInput
                             placeholder='Location of dummy, address'
                             style={{
+                                color:'#000',
                                 height: 40,
                                 borderRadius: 20,
                                 margin: 12,

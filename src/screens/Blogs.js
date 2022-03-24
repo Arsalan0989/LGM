@@ -3,6 +3,9 @@ import { View, ScrollView, SafeAreaView, ActivityIndicator, FlatList, TouchableO
 import { vw, vh } from '../constant';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
+import { axiosClient } from './client';
+
+
 export default function HomeScreen(props) {
 
     const [blogData, setBlogData] = useState([])
@@ -28,7 +31,7 @@ export default function HomeScreen(props) {
                         }
                     };
 
-                    axios.get("https://hitsofficialuae.com/lgm/api/home/blogs?user_id=" + userDetails.customer_id, axiosConfig).then(res => {
+                    axiosClient.get("home/blogs?user_id=" + userDetails.customer_id, axiosConfig).then(res => {
                         console.log("RESPOMSEEEEEE", res.data.data.news);
                         console.log("RESPOMSEEEEEE", res.data.data.featured);
                         setIsLoading(false)
@@ -65,7 +68,7 @@ export default function HomeScreen(props) {
                 }
             };
 
-            axios.get("https://hitsofficialuae.com/lgm/api/guest/blogs", axiosConfig).then(res => {
+            axiosClient.get("guest/blogs", axiosConfig).then(res => {
                // console.log("RESPOMSEEEEEE", res.data.data.news);
                // console.log("RESPOMSEEEEEE", res.data.data.featured);
                 let tempArr = []
@@ -135,8 +138,8 @@ export default function HomeScreen(props) {
 
                                             <View style={{ flexDirection: "row", marginVertical: 10, marginHorizontal: 10, width: "85%" }}>
                                                 <Image source={{ "uri": item.profile_pic }} style={{ height: 30, width: 30, borderRadius: 22 }} />
-                                                <Text style={{ marginLeft: 10, width: "70%" }}>{item.username}</Text>
-                                                <Text style={{ fontSize: 10, marginTop: vh * 0.004, marginHorizontal: 10 }}>{item.time}</Text>
+                                                <Text style={{ color:'#A2A2A2',marginLeft: 10, width: "70%" }}>{item.username}</Text>
+                                                <Text style={{color:'#A2A2A2', fontSize: 10, marginTop: vh * 0.004, marginHorizontal: 10 }}>{item.time}</Text>
                                             </View>
 
 
@@ -169,7 +172,7 @@ export default function HomeScreen(props) {
                                             <Text style={{ color: '#2D240E', marginBottom: vh * 0.03, width: vw * 0.5, }}>{item.news_title}</Text>
                                             <View style={{ flexDirection: "row", width: "80%" }}>
                                                 <Text style={{ color: '#000', }}>{item.username}</Text>
-                                                <Text style={{ fontSize: 10 }}>{item.time}</Text>
+                                                <Text style={{ color:'#A2A2A2',fontSize: 10 }}>{item.time}</Text>
                                             </View>
                                         </View>
                                     </View>

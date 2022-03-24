@@ -3,6 +3,8 @@ import { View, ScrollView, SafeAreaView, StyleSheet, ActivityIndicator, Touchabl
 import { vw, vh } from '../constant';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
+import { axiosClient } from './client';
+
 export default function BlogScreen(props) {
     const [isLoading, setIsLoading] = useState(true)
 
@@ -48,7 +50,7 @@ export default function BlogScreen(props) {
                         }
                     };
 
-                    axios.get("https://hitsofficialuae.com/lgm/api/home/singleblog?user_id=" + userDetails.customer_id + "&news_id=" + props.route.params.news_id, axiosConfig).then(res => {
+                    axiosClient.get("home/singleblog?user_id=" + userDetails.customer_id + "&news_id=" + props.route.params.news_id, axiosConfig).then(res => {
                         console.log("RESPOMSEEEEEE check ", res.data.next_id);
                         setIsLoading(false);
                         setnext(res.data.next_id)
@@ -98,7 +100,7 @@ export default function BlogScreen(props) {
                         }
                     };
 
-                    axios.get("https://hitsofficialuae.com/lgm/api/guest/singleblog?news_id=" + props.route.params.news_id, axiosConfig).then(res => {
+                    axiosClient.get("guest/singleblog?news_id=" + props.route.params.news_id, axiosConfig).then(res => {
                         console.log("RESPOMSEEEEEE check ", res.data.next_id);
                         setIsLoading(false);
                         setnext(res.data.next_id)
@@ -171,7 +173,7 @@ export default function BlogScreen(props) {
 
                             <View style={{ flexDirection: "row", marginVertical: 10, marginHorizontal: 10, width: "85%" }}>
                                 <Image source={{ "uri": profileimg }} style={{ height: 30, width: 30, borderRadius: 22 }} />
-                                <Text style={{ marginLeft: 10, width: "70%" }}>{newsUsername}</Text>
+                                <Text style={{ color:'#A2A2A2',marginLeft: 10, width: "70%" }}>{newsUsername}</Text>
                                 <Text style={{ fontSize: 10, marginTop: vh * 0.004, marginHorizontal: 10 }}></Text>
                             </View>
 
