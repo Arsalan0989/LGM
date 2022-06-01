@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, ImageBackground, Image, TouchableOpacity, SafeAreaView } from 'react-native'
+import { View, Text, ImageBackground, Image, TouchableOpacity, ActivityIndicator, SafeAreaView } from 'react-native'
 import { vw, vh } from '../constant'
 import {
   GoogleSignin,
   GoogleSigninButton,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
+import AsyncStorage from '@react-native-community/async-storage';
+import { axiosClient } from './client';
 export default function UserSignup(props) {
 
 
@@ -21,15 +23,74 @@ export default function UserSignup(props) {
     openIdRealm: '', // [iOS] The OpenID2 realm of the home web server. This allows Google to include the user's OpenID Identifier in the OpenID Connect ID token.
     profileImageSize: 120, // [iOS] The desired height (and width) of the profile image. Defaults to 120px
   });
-  const [loggedIn, setloggedIn] = useState(false);
-  const [userInfo, setuserInfo] = useState([]);
+  const [loaderr, setLoader] = useState(false)
+  const [name, setname] = useState('');
+  const [email, setemail] = useState('');
+  const [photo, setphoto] = useState('');
+  const [data, setdata] = useState('');
 
-  _signIn = async () => {
+
+
+  const _signIn = async () => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
-      console.log(userInfo);
-      this.setState({ userInfo });
+      console.log(userInfo.user, 'Userrrrrrrrrrr data');
+      setname(userInfo.user.name)
+      setemail(userInfo.user.email)
+      setphoto(userInfo.user.photo)
+
+      setLoader(true)
+      AsyncStorage.getItem('device_token', (err, device_token) => {
+        if (device_token) {
+
+          var postData = {
+
+            email: email,
+            firstname: name,
+            laststname: "",
+            image: photo,
+          }
+          console.log(postData);
+
+          axiosClient.post("/auth/sociallogin", postData).then(res => {
+            if (res.data.error == "") {
+              try {
+                AsyncStorage.setItem("is_loggedin", '1')
+                console.log("fdsfsdfsdgsdf==========", res.data.customer_id);
+                AsyncStorage.setItem("role_id", res.data.customer_id)
+                AsyncStorage.setItem("modal_box", "0")
+                AsyncStorage.setItem("user", JSON.stringify(res.data))
+                // props.navigation.replace("myTab")
+
+                setLoader(false)
+
+              } catch (e) {
+                console.log(e) // saving error
+              }
+            } else {
+              alert(res.data.error)
+              setLoader(false)
+            }
+
+          }).catch(err => {
+            console.log(err, "Errorrr");
+            alert(err.message)
+            setLoader(false)
+          })
+
+        }
+      });
+
+
+
+      console.log('====================================');
+      console.log(name, 'name')
+      console.log(email, 'email')
+      console.log(photo, 'photo');
+      console.log('====================================');
+      setdata(userInfo);
+      console.log(data, 'dataaaaaaaaaa')
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         // user cancelled the login flow
@@ -53,7 +114,7 @@ export default function UserSignup(props) {
   useEffect(() => {
     GoogleSignin.configure({
       scopes: ['https://www.googleapis.com/auth/drive.readonly'], // [Android] what API you want to access on behalf of the user, default is email and profile
-      webClientId: '<FROM DEVELOPER CONSOLE>', // client ID of type WEB for your server (needed to verify user ID and offline access)
+      webClientId: '248895029063-rqi26a26lnbiivk3hjl5m30u4pncf50r.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
       offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
       hostedDomain: '', // specifies a hosted domain restriction
       forceCodeForRefreshToken: true, // [Android] related to `serverAuthCode`, read the docs link below *.
@@ -65,16 +126,8 @@ export default function UserSignup(props) {
     });
   }, []);
 
-  signOut = async () => {
-    try {
-      await GoogleSignin.revokeAccess();
-      await GoogleSignin.signOut();
-      setloggedIn(false);
-      setuserInfo([]);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+
+
 
   return (
     <SafeAreaView style={{ flex: 1, alignItems: "center", backgroundColor: '#fff' }}>
@@ -96,21 +149,13 @@ export default function UserSignup(props) {
               <Text style={{ color: "#333", paddingHorizontal: 70, paddingVertical: 12, fontWeight: "bold" }}>I'LL USE EMAIL OR PHONE</Text>
             </TouchableOpacity>
             <View style={{ flex: 1, flexDirection: 'row', marginTop: vh * 0.15 }}>
-              {/* <TouchableOpacity>
-                            <Image source={require('../assets/twitter.png')} style={{ height: 50, width: 50 }} />
-                        </TouchableOpacity> */}
-              {/* <TouchableOpacity onPress={_signIn}>
-                <Image source={require('../assets/google-plus.png')} style={{ height: 50, width: 50 }} />
-              </TouchableOpacity> */}
-              {/* <TouchableOpacity>
-                            <Image source={require('../assets/linkedin.png')} style={{ height: 50, width: 50 }} />
-                        </TouchableOpacity> */}
+
             </View>
             <View style={{ flex: 1, flexDirection: 'row', marginBottom: vh * 0.08 }}>
-              <Text style={{ color: '#000', fontFamily: 'Railway', fontWeight: '600' }}>
+              <Text style={{ color: '#000', fontFamily: 'Railway', fontWeight: '600', fontSize: 15 }}>
                 Already have account?
               </Text>
-              <TouchableOpacity onPress={() => { props.navigation.navigate("Login") }}><Text style={{ color: '#CCA42B', fontFamily: 'Railway' }}>login</Text></TouchableOpacity>
+              <TouchableOpacity onPress={() => { props.navigation.navigate("Login") }}><Text style={{ color: '#CCA42B', fontFamily: 'Railway', fontSize: 15, marginHorizontal: 5, textDecorationLine: 'underline', }}>login</Text></TouchableOpacity>
             </View>
           </View>
 

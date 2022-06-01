@@ -28,12 +28,13 @@ export default function ContWithEmail(props) {
             if (res.data.message == "") {
                 setemail("")
                 setLoader(false)
-                // props.navigation.navigate("myTab")
+                // props.navigation.navigate("Login")
 
 
             } else {
                 alert(res.data.message)
                 setLoader(false)
+                props.navigation.navigate("Login")  
             }
 
         })
@@ -48,18 +49,18 @@ export default function ContWithEmail(props) {
     const renderButton = () => {
         if (loaderr) {
             return (
-                <View style={{marginTop:10,alignItems:'center'}}>
+                <View style={{ marginTop: 10, alignItems: 'center' }}>
                     <ActivityIndicator color="black" size="small" />
                 </View>
             )
         }
         else {
             return (
-                <View style={{marginTop:10,alignItems:'center'}}>
-                                   <TouchableOpacity onPress={() => { forgot() }} style={{ width: vh * 0.4, borderRadius: 20, backgroundColor: "#333", alignItems: 'center', justifyContent: 'center', marginLeft: '3%' }}>
-                    <Text style={{ color: "white", textAlign: 'center', paddingVertical: 12, fontWeight: "bold" }}>Signup</Text>
-                </TouchableOpacity>
-                        </View>
+                <View style={{ marginTop: 10, alignItems: 'center' }}>
+                    <TouchableOpacity onPress={() => { forgot() }} style={{ width: vh * 0.4, borderRadius: 20, backgroundColor: "#333", alignItems: 'center', justifyContent: 'center', marginLeft: '3%' }}>
+                        <Text style={{ color: "white", textAlign: 'center', paddingVertical: 12, fontWeight: "bold" }}>Signup</Text>
+                    </TouchableOpacity>
+                </View>
             )
         }
     }
@@ -84,29 +85,29 @@ export default function ContWithEmail(props) {
 
                         <View style={{ flex: 1, alignItems: 'center', marginTop: 10 }}>
                             <Image source={require('../assets/cemail.png')} resizeMode='cover' style={{ height: 200, width: 170, }} />
-                            <Text style={{ alignItems: 'center', color: '#000' }}>{`You'll receive a 4 digit code\n              to verify next`}.</Text>
-                            <View style={{ flex: 1 ,alignItems:'center'}}>
+                            <Text style={{ alignItems: 'center', color: '#000', textAlign: 'center', marginHorizontal: vw * 0.1 }}>You will receive a 4 digit code on your registered email to verify. Please check</Text>
+                            <View style={{ flex: 1, alignItems: 'center' }}>
                                 <TextInput
-                                     mode="outlined"
-                                     label="Email Address"
-                                     placeholder="alicejack@gmail.com"
-                                     borderColor="false"
-                                     theme={{ roundness: 30, colors: { primary: '#A2A2A2', underlineColor: 'transparent', } }}
-                                     style={{
-                                         height: 30,
-                                         padding: 10,
-                                         width: vh * 0.4,
-                                         fontSize: 15,
-                                         backgroundColor: '#fff'
-                                     }}
+                                    mode="outlined"
+                                    label="Email Address"
+                                    placeholder="alicejack@gmail.com"
+                                    borderColor="false"
+                                    theme={{ roundness: 30, colors: { primary: '#A2A2A2', underlineColor: 'transparent', } }}
+                                    style={{
+                                        height: 30,
+                                        padding: 10,
+                                        width: vh * 0.4,
+                                        fontSize: 15,
+                                        backgroundColor: '#fff'
+                                    }}
                                     onChangeText={setemail}
                                     value={email}
                                 />
-                              
-                              {renderButton()}
+
+                                {renderButton()}
                             </View>
 
-                          
+
                         </View>
 
 

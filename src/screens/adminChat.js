@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, ScrollView, Text, Button, StyleSheet,Keyboard, TouchableOpacity, Image } from 'react-native';
-import { Bubble, GiftedChat, Send,InputToolbar  } from 'react-native-gifted-chat';
+import { View, ScrollView, Text, Button, StyleSheet, Keyboard, TouchableOpacity, Image } from 'react-native';
+import { Bubble, GiftedChat, Send, InputToolbar } from 'react-native-gifted-chat';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { LogBox } from "react-native";
@@ -128,8 +128,8 @@ const adminChat = ({ navigation, route }) => {
         <View>
           <MaterialCommunityIcons
             name="send-circle"
-            style={{ marginBottom: 5, marginRight: 5 }}
-            size={32}
+            style={{ marginHorizontal: 10, marginBottom: 10 }}
+            size={30}
             color="#2D240E"
           />
         </View>
@@ -156,10 +156,10 @@ const adminChat = ({ navigation, route }) => {
       />
     );
   };
-  const renderInputToolbar =(props)=> {
+  const renderInputToolbar = (props) => {
     //Add the extra styles via containerStyle
-   return <InputToolbar {...props} textInputStyle={{ color: "#000" }}/>
- }
+    return <InputToolbar {...props} textInputStyle={{ color: "#000" }} />
+  }
 
   const scrollToBottomComponent = () => {
     return (
@@ -168,9 +168,9 @@ const adminChat = ({ navigation, route }) => {
   }
   const renderAttachment = (props) => {
     return (<View style={{ flexDirection: 'row' }}>
-      <TouchableOpacity onPress={() => navigation.replace("myTab")} style={{ padding: 20, backgroundColor: "#EAE9E6", flexDirection: 'column', justifyContent: 'space-around' }}>
+      <TouchableOpacity onPress={() => navigation.replace("myTab")} style={{ padding: 14, backgroundColor: "#EAE9E6", flexDirection: 'column', justifyContent: 'space-around' }}>
         <Image source={require('../assets/back.png')} style={{ height: 10, width: 16, padding: 2, resizeMode: 'contain' }} />
-        <Text style={{ fontSize: 10, color:'#000'}}>Back</Text>
+        <Text style={{ fontSize: 10, color: '#000' }}>Back</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={selectFile} style={{ padding: 20, backgroundColor: "#EAE9E6", flexDirection: 'row', justifyContent: 'space-around' }}>
         <Image source={require('../assets/presep.png')} style={{ height: 10, width: 10, padding: 0, resizeMode: 'contain' }} />
@@ -196,7 +196,7 @@ const adminChat = ({ navigation, route }) => {
       infiniteScroll={true}
       scrollToBottom={true}
       scrollToBottomComponent={scrollToBottomComponent}
-      renderInputToolbar={renderInputToolbar} 
+      renderInputToolbar={renderInputToolbar}
     />
   );
 };

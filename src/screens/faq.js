@@ -1,4 +1,4 @@
-import { View, Text, ImageBackground, Keyboard, FlatList, Image, KeyboardAvoidingView, TouchableWithoutFeedback, } from 'react-native';
+import { View, Text, ImageBackground, useWindowDimensions, Keyboard, FlatList, Image, KeyboardAvoidingView, TouchableWithoutFeedback, } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView, TouchableHighlight, TouchableOpacity } from 'react-native-gesture-handler';
@@ -7,9 +7,18 @@ import { TextInput, List } from 'react-native-paper';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 import { axiosClient } from './client';
+import RenderHtml from 'react-native-render-html';
 
+
+
+// const source = {
+//     html: `
+//   <p style='text-align:center;'>
+//     Hello World!
+//   </p>`
+//   };
 export default function faq(props) {
-   
+    const { width } = useWindowDimensions();
     const [expanded, setExpanded] = React.useState(true);
     const handlePress = () => setExpanded(!expanded);
     const [search, setsearch] = React.useState('');
@@ -116,7 +125,7 @@ export default function faq(props) {
                         </Text>
 
 
-                    </View>
+                    </View> 
                     <View style={{ marginVertical: 20, alignItems: 'center', marginHorizontal: 21 }}>
                         <Text style={{ color: '#A2A2A2', fontSize: 15, }}>
                             {title}
@@ -157,14 +166,17 @@ export default function faq(props) {
                                         right={props => <List.Icon {...props} icon={({ size, color }) => (
                                             <Image
                                                 source={require('../assets/down.png')}
-                                                style={{height:20,width:12 }}
+                                                style={{ height: 20, width: 12 }}
                                             />
                                         )} />}>
 
-                                        <Text style={{ color:'#A2A2A2',marginHorizontal: 10, marginVertical: 10, fontSize: 15 }}>
+                                        <Text style={{ color: '#A2A2A2', marginHorizontal: 10, marginVertical: 10, fontSize: 15 }}>
                                             {item.description}
                                         </Text>
-
+                                        {/* <RenderHtml
+                                            contentWidth={width}
+                                            source={source}
+                                        /> */}
                                     </List.Accordion>
 
 

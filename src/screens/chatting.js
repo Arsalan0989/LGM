@@ -120,8 +120,8 @@ const ChatScreen = ({ navigation, route }) => {
         <View>
           <MaterialCommunityIcons
             name="send-circle"
-            style={{ marginBottom: 5, marginRight: 5 }}
-            size={32}
+            style={{ marginHorizontal:10,marginBottom:10 }}
+            size={30}
             color="#2D240E"
           />
         </View>
@@ -158,7 +158,7 @@ const ChatScreen = ({ navigation, route }) => {
     // </TouchableOpacity>)
 
     return (<View style={{ flexDirection: 'row' }}>
-      <TouchableOpacity onPress={() => navigation.goBack()} style={{ padding: 20, backgroundColor: "#EAE9E6", flexDirection: 'column', justifyContent: 'space-around' }}>
+      <TouchableOpacity onPress={() => navigation.goBack()} style={{ padding: 14, backgroundColor: "#EAE9E6", flexDirection: 'column', justifyContent: 'space-around' }}>
         <Image source={require('../assets/back.png')} style={{ height: 10, width: 16, padding: 2, resizeMode: 'contain' }} />
         <Text style={{ fontSize: 10, color:'#000'}}>Back</Text>
 
