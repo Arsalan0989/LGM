@@ -9,6 +9,11 @@ import {
 import AsyncStorage from '@react-native-community/async-storage';
 import { axiosClient } from './client';
 export default function UserSignup(props) {
+  const [loaderr, setLoader] = useState(false)
+  const [name, setname] = useState('');
+  const [email, setemail] = useState('');
+  const [photo, setphoto] = useState('');
+  const [data, setdata] = useState('');
 
 
   GoogleSignin.configure({
@@ -23,11 +28,6 @@ export default function UserSignup(props) {
     openIdRealm: '', // [iOS] The OpenID2 realm of the home web server. This allows Google to include the user's OpenID Identifier in the OpenID Connect ID token.
     profileImageSize: 120, // [iOS] The desired height (and width) of the profile image. Defaults to 120px
   });
-  const [loaderr, setLoader] = useState(false)
-  const [name, setname] = useState('');
-  const [email, setemail] = useState('');
-  const [photo, setphoto] = useState('');
-  const [data, setdata] = useState('');
 
 
 
@@ -36,16 +36,16 @@ export default function UserSignup(props) {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       console.log(userInfo.user, 'Userrrrrrrrrrr data');
-      setname(userInfo.user.name)
-      setemail(userInfo.user.email)
-      setphoto(userInfo.user.photo)
+     if(userInfo?.user){
+      setname(txt =>{userInfo?.user.name})
+      setemail(txt =>{userInfo?.user.email})
+      setphoto(txt =>{userInfo?.user.photo})
 
       setLoader(true)
       AsyncStorage.getItem('device_token', (err, device_token) => {
         if (device_token) {
 
-          var postData = {
-
+          var postData =  {
             email: email,
             firstname: name,
             laststname: "",
@@ -61,7 +61,7 @@ export default function UserSignup(props) {
                 AsyncStorage.setItem("role_id", res.data.customer_id)
                 AsyncStorage.setItem("modal_box", "0")
                 AsyncStorage.setItem("user", JSON.stringify(res.data))
-                // props.navigation.replace("myTab")
+                props.navigation.replace("myTab")
 
                 setLoader(false)
 
@@ -91,6 +91,8 @@ export default function UserSignup(props) {
       console.log('====================================');
       setdata(userInfo);
       console.log(data, 'dataaaaaaaaaa')
+     }
+     
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         // user cancelled the login flow

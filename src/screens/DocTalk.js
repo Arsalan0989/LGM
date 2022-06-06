@@ -32,6 +32,8 @@ export default function DocTalk(props) {
         { label: 'Gambling more money in an attempt to win back losses', value: 'Gambling more money in an attempt to win back losses' },
         { label: 'Selling personal possessions to get money to gamble', value: 'Selling personal possessions to get money to gamble' },
         { label: 'Feelings of hopelessness, depression, or suicide as a result of gambling', value: 'Feelings of hopelessness, depression, or suicide as a result of gambling' },
+        { label: 'Addictedto Alcohol', value: 'Addicted to Alcohol' },
+        { label: 'Addicted to Drugs', value: 'Addicted to Drugs' },   
     ]);
     const [loaderr, setLoader] = useState(false)
     const [isModalVisible, setModalVisible] = useState(false);
