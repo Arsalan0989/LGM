@@ -61,7 +61,7 @@ export default function UserSignup(props) {
                 AsyncStorage.setItem("role_id", res.data.customer_id)
                 AsyncStorage.setItem("modal_box", "0")
                 AsyncStorage.setItem("user", JSON.stringify(res.data))
-                props.navigation.replace("myTab")
+                // props.navigation.replace("myTab")
 
                 setLoader(false)
 

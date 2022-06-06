@@ -264,7 +264,7 @@ export default function profile(props) {
 
                                         </Text>
                                         <Text style={{ marginTop: -2.5, fontSize: 16, color: '#000', }}>
-                                            Password Update
+                                        Update Password
                                         </Text>
 
                                     </View>

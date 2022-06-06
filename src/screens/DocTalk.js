@@ -17,6 +17,8 @@ const UselessTextInput = (props) => {
     );
 }
 export default function DocTalk(props) {
+    const [keyboardStatus, setKeyboardStatus] = useState(undefined);
+
     const [userId, setUserId] = useState('');
     const [open, setOpen] = useState(false);
     const [message, setmessage] = useState('');
@@ -32,14 +34,14 @@ export default function DocTalk(props) {
         { label: 'Gambling more money in an attempt to win back losses', value: 'Gambling more money in an attempt to win back losses' },
         { label: 'Selling personal possessions to get money to gamble', value: 'Selling personal possessions to get money to gamble' },
         { label: 'Feelings of hopelessness, depression, or suicide as a result of gambling', value: 'Feelings of hopelessness, depression, or suicide as a result of gambling' },
-        { label: 'Addictedto Alcohol', value: 'Addicted to Alcohol' },
-        { label: 'Addicted to Drugs', value: 'Addicted to Drugs' },   
+        { label: 'Addicted to Alcohol', value: 'Addicted to Alcohol' },
+        { label: 'Addicted to Drugs', value: 'Addicted to Drugs' },
     ]);
     const [loaderr, setLoader] = useState(false)
     const [isModalVisible, setModalVisible] = useState(false);
     const [available_type, setAvailable_Type] = useState("");
     const [chatId, setChatId] = useState()
-
+    const [number,  onChangeText] = React.useState(null);
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
     };
@@ -152,7 +154,7 @@ export default function DocTalk(props) {
 
 
     }
-
+   
     const renderButton = () => {
         if (loaderr) {
             return (
@@ -230,7 +232,7 @@ export default function DocTalk(props) {
                                 numberOfLines={4}
                                 placeholder='Please explain your problem in detail.'
                                 style={{
-                                    color:'#000',
+                                    color: '#000',
                                     height: vh * 0.15,
                                     borderRadius: 22,
                                     margin: 12,
@@ -244,6 +246,7 @@ export default function DocTalk(props) {
                                 }}
                                 onChangeText={setmessage}
                                 value={message}
+                            
                             />
                         </View>
                         <View style={{ marginRight: vw * 0.32, padding: 20, marginTop: -20 }}>
@@ -255,7 +258,6 @@ export default function DocTalk(props) {
                                     checked={select}
                                     onPress={() => {
                                         setselect(!select)
-                                        //setAvailable_Type("Available for Check-Up,Paid Check-Up Accepted")
                                         setAvailable_Type("Available for Check-Up")
                                     }}
                                 />
@@ -297,7 +299,7 @@ export default function DocTalk(props) {
                                         <Text
                                             numberOfLines={4}
                                             style={{
-                                                color:'#000',
+                                                color: '#000',
                                                 height: vh * 0.15,
                                                 borderRadius: 22,
                                                 margin: 12,
